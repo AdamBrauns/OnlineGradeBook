@@ -1,46 +1,60 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <meta name="description" content="Login Page for Gradebook Service Project">
-    <meta name="author" content="Grant Jones">
 
+<head>
+	<meta charset="utf-8">
+	<title>Sign In</title>
 
-    <title>Gradebook Login</title>
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
 
-    <!-- Bootstrap core CSS -->
-    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" href="css/loginPage.css">
 
-    <!-- Custom styles for this template -->
-    <link href="dist/css/signin.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
 
-  </head>
+<body>
+	<div class="container">
+		<div class="top">
+			<h1 id="title" class="hidden"><span id="logo"></span></h1>
+		</div>
+		<div class="login-box animated fadeInUp">
+			<div class="box-header">
+				<!--<h2>Online Gradebook</h2> -->
+				<h2>Log In</h2>
+			</div>
+			<label for="username">Username</label>
+			<br/>
+			<input type="text" id="username">
+			<br/>
+			<label for="password">Password</label>
+			<br/>
+			<input type="password" id="password">
+			<br/>
+			<button type="submit">Sign In</button>
+			<br/>
+			<a href="#"><p class="small">Don't have an account? Sign up here!</p></a>
+		</div>
+	</div>
+</body>
 
-  <body>
+<script>
+	$(document).ready(function () {
+    	$("input:text:visible:first").focus();
+	});
+	$('#username').focus(function() {
+		$('label[for="username"]').addClass('selected');
+	});
+	$('#username').blur(function() {
+		$('label[for="username"]').removeClass('selected');
+	});
+	$('#password').focus(function() {
+		$('label[for="password"]').addClass('selected');
+	});
+	$('#password').blur(function() {
+		$('label[for="password"]').removeClass('selected');
+	});
+</script>
 
-    <div class="container">
-
-      <form class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
-
-    </div> <!-- /container -->
-
-
-
-  </body>
 </html>
