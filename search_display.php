@@ -14,12 +14,12 @@
   <div class="jumbotron">
     <h1>Welcome to the Gradebook Search</h1> 
     <div class="col-md-6 col-centered">
-    <p>Type in a last name to search.</p>
+    <p>Type in a username to search</p>
 	    <form  method="post" action="search.php?go"  id="searchform"> 
 	      <input  type="text" name="name"> 
 	      <input  type="submit" name="submit" value="Search"> 
 	    </form> 
-		<?php
+	    		<?php
 			if(isset($_POST['submit'])){
 			if(isset($_GET['go'])){
 			if(preg_match("/^[  a-zA-Z]+/", $_POST['name'])){
