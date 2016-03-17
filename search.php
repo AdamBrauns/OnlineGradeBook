@@ -35,7 +35,7 @@
 			//-create  while loop and loop through result set
 			while($row=mysql_fetch_array($result)){
 					$firstName  =$row['firstName'];
-					$lastName=$row['fastName'];
+					$lastName=$row['lastName'];
 					$idNumber=$row['idNumber'];
 			//-display the result of the array
 			echo "<ul>\n";
