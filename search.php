@@ -47,6 +47,30 @@
 			echo  "<p>Please enter a search query</p>";
 			}
 			}
+			}//end of search form script
+			if(isset($_GET['by'])){
+			$letter=$_GET['by'];
+			//connect  to the database
+			$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
+			//-select  the database to use
+			$mydb=mysql_select_db("cs476");
+			//-query  the database table
+			$sql="SELECT  idNumber, firstName, lastName FROM Users WHERE firstName LIKE '%" . $letter . "%' OR lastName LIKE '%" . $letter ."%'";
+			//-run  the query against the mysql query function
+			$result=mysql_query($sql);
+			//-count  results
+			$numrows=mysql_num_rows($result);
+			echo  "<p>" .$numrows . " results found for " . $letter . "</p>";
+			//-create  while loop and loop through result set
+			while($row=mysql_fetch_array($result)){
+				$firstName  =$row['firstName'];
+				$lastName=$row['lastName'];
+				$idNumber=$row['idNumber'];
+			//-display  the result of the array
+			echo  "<ul>\n";
+			echo  "<li>" . "<a  href=\"search_display.php?id=$idNumber\">"   .$FirstName . " " . $LastName .  "</a></li>\n";
+			echo  "</ul>";
+			}
 			}
 			?>
       </div>

@@ -14,40 +14,42 @@
   <div class="jumbotron">
     <h1>Welcome to the Gradebook Search</h1> 
     <div class="col-md-6 col-centered">
-    <p>Type in a username to search</p>
+    <p>Type in a last name to search.</p>
 	    <form  method="post" action="search.php?go"  id="searchform"> 
 	      <input  type="text" name="name"> 
 	      <input  type="submit" name="submit" value="Search"> 
 	    </form> 
-	    		<?php
-			if(isset($_POST['submit'])){
-			if(isset($_GET['go'])){
-			if(preg_match("/^[  a-zA-Z]+/", $_POST['name'])){
-			$name=$_POST['name'];
-			//connect  to the database
-			$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
-			//-select  the database to use
-			$mydb=mysql_select_db("cs476");
-			//-query  the database table
-			$sql="SELECT  idNumber, firstName, lastName FROM Users WHERE firstName LIKE '%" . $name .  "%' OR lastName LIKE '%" . $name ."%'";
-			//-run  the query against the mysql query function
-			$result=mysql_query($sql);
-			//-create  while loop and loop through result set
-			while($row=mysql_fetch_array($result)){
-					$firstName  =$row['firstName'];
+	    	<?php
+				if(isset($_GET['idNumber'])){
+				$idNumber=$_GET['idNumber'];
+				//connect  to the database
+				$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
+				//-select  the database to use
+				$mydb=mysql_select_db("cs476");
+				//-query  the database table
+				$sql="SELECT  * FROM Contact WHERE idNumber = '$idNumber'";
+				//-run  the query against the mysql query function
+				$result=mysql_query($sql);
+				//-create  while loop and loop through result set
+				while($row=mysql_fetch_assoc($result)){
+					$firstName =$row['firstName'];
 					$lastName=$row['lastName'];
-					$idNumber=$row['idNumber'];
-			//-display the result of the array
-			echo "<ul>\n";
-			echo "<li>" . "<a  href=\"search_display.php?id=$idNumber\">"   .$firstName . " " . $lastName .  "</a></li>\n";
-			echo "</ul>";
-			}
-			}
-			else{
-			echo  "<p>Please enter a search query</p>";
-			}
-			}
-			}
+					$phoneNumber=$row['phoneNumber'];
+					$emailAddress=$row['emailAddress'];
+					$addressLine1=$row['addressLine1'];
+					$addressLine2=$row['addressLine2'];
+					$zipcode=$row['zipcode'];
+					$stateID=$row['stateID'];
+				//-display  the result of the array
+				echo  "<ul>\n";
+				echo  "<li>" . $FirstName . " " . $LastName .  "</li>\n";
+			    echo  "<li>" . $PhoneNumber . "</li>\n";
+				echo  "<li>" . "<a href=mailto:" . $Email .  ">" . $Email . "</a></li>\n";
+				echo  "<li>" . $addressLine1 . " " . $addressLine2 . "</li>\n";
+				echo  "<li>" . $stateID . " " . $zipcode . "</li>\n"; 
+				echo  "</ul>";
+				}
+				}
 			?>
       </div>
   </div>
