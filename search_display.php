@@ -19,45 +19,90 @@
 	      <input  type="text" name="name"> 
 	      <input  type="submit" name="submit" value="Search"> 
 	    </form> 
-	<?php
-				echo $_GET['idnumber'];
+		<?php
+			if(isset($_POST['submit'])){
+			if(isset($_GET['go'])){
+			if(preg_match("/^[  a-zA-Z]+/", $_POST['name'])){
+			$name=$_POST['name'];
+			//connect  to the database
+			$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
+			//-select  the database to use
+			$mydb=mysql_select_db("cs476");
+			//-query  the database table
+			$sql="SELECT  idNumber, firstName, lastName FROM Users WHERE firstName LIKE '%" . $name .  "%' OR lastName LIKE '%" . $name ."%'";
+			//-run  the query against the mysql query function
+			$result=mysql_query($sql);
+			//-create  while loop and loop through result set
+			while($row=mysql_fetch_array($result)){
+					$firstName  =$row['firstName'];
+					$lastName=$row['lastName'];
+					$idNumber=$row['idNumber'];
+			//-display the result of the array
+			echo "<ul>\n";
+			echo "<li>" . "<a  href=\"search_display.php?idNumber=$idNumber\">"   .$firstName . " " . $lastName . " " . $idNumber . "</a></li>\n";
+			echo "</ul>";
+			}
+			}
+			else{
+			echo  "<p>Please enter a search query</p>";
+			}
+			}
+			}//end of search form script
+			if(isset($_GET['by'])){
+			$letter=$_GET['by'];
+			//connect  to the database
+			$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
+			//-select  the database to use
+			$mydb=mysql_select_db("cs476");
+			//-query  the database table
+			$sql="SELECT  idNumber, firstName, lastName FROM Users WHERE firstName LIKE '%" . $letter . "%' OR lastName LIKE '%" . $letter ."%'";
+			//-run  the query against the mysql query function
+			$result=mysql_query($sql);
+			//-count  results
+			$numrows=mysql_num_rows($result);
+			echo  "<p>" .$numrows . " results found for " . $letter . "</p>";
+			//-create  while loop and loop through result set
+			while($row=mysql_fetch_array($result)){
+				$firstName  =$row['firstName'];
+				$lastName=$row['lastName'];
+				$idNumber=$row['idNumber'];
+			//-display  the result of the array
+			echo  "<ul>\n";
+			echo  "<li>" . "<a  href=\"search_display.php?idNumber=$idNumber\">"   .$firstName . " " . $lastName . " " .$idNumber . "</a></li>\n";
+			echo  "</ul>";
+			}
+			}
 				if(isset($_GET['idNumber'])){
 				$idNumber=$_GET['idNumber'];
-				include('./model/dbconnect.php');
-				global $db;
+				$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
 				//-query  the database table
 				$sql="SELECT  * FROM Contact WHERE idNumber = '".$idNumber."'";
 				
 				// Prepare statement
-				$statement = $db->prepare($sql);
-				// Execute the statement
-				$statement->execute();
-				// Read records into an array
-				$results = $statement->fetchAll();
+				$mydb=mysql_select_db("cs476");
+				$result=mysql_query($sql);
 
-				foreach  ($results as $row){
-				//	$firstName =$row['firstName'];
-				//	$lastName=$row['lastName'];
-				//	$phoneNumber=$row['phoneNumber'];
-				//	$emailAddress=$row['emailAddress'];
-				//	$addressLine1=$row['addressLine1'];
-				//	$addressLine2=$row['addressLine2'];
-				//	$zipcode=$row['zipcode'];
-				//	$stateID=$row['stateID'];
+			while($row=mysql_fetch_array($result)){
+				$idNumber=$row['idNumber'];
+				$phoneNumber=$row['phoneNumber'];
+				$emailAddress=$row['emailAddress'];
+				$addressLine1=$row['addressLine1'];
+				$addressLine2=$row['addressLine2'];
+				$stateID=$row['stateID'];
+				$zipcode=$row['zipcode'];
 				
 				//-display  the result of the array
-				echo   $row['firstName']  $row['lastName'];
-			    echo   $row['phoneNumber'];
-				echo   $row['emailAddress'];
-				echo   $row['addressLine1']  $row['addressLine2'];
-				echo   $row['stateID']  $row['zipcode']; 
-
+				echo  "<ul>\n";
+				echo  "<li>"   .$firstName . " " . $lastName . " " .$idNumber ."</a></li>\n";
+				echo  "<li>"   .$phoneNumber . " " . $emailAddress ."</a></li>\n";
+				echo  "<li>"   .$addressLine1 . " " . $addressLine2 ."</a></li>\n";
+				echo  "<li>"   .$stateID . " " . $zipcode ."</a></li>\n";
+				echo  "</ul>";
 				}
 				}
-	?>
-
+			?>
+      </div>
   </div>
-</div>
 </div>
 </body>
 </html>
