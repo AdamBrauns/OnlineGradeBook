@@ -78,7 +78,11 @@ or die ('Cannot connect to db');
 	}
 
     echo "</select>";
-	
+	echo "<br> Enter student's ID number. <br>";
+	echo "<input type='text' name='idNumber'>";
+	echo "<br> Enter assignment grade. <br>";
+	echo "<input type='text' name='grade'>";
+	echo "<br> <button type='button' Submit </button>";
 	
 
 ?>
