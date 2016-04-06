@@ -62,7 +62,7 @@
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="assets/img/students.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4><a id="addRemStu">Add/Remove Students</a></h4>
+              <h4><a id="addRemStu">Add/Remove Users</a></h4>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="assets/img/classes.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
@@ -70,21 +70,40 @@
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="assets/img/password.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4><a href ="">Change Passwords</a></h4>
+              <h4><a id="changepass">Change Password</a></h4>
             </div>
           </div>
           <div>
-            <button type="button" id="add" style="display:none">Add Students</button>
-            <button type="button" id="rem" style="display:none">Remove Students</button>
+            <form id="firstbuttons" style="display:none">
+              <button type="button" id="add">Add User</button>
+              <button type="button" id="rem">Remove User</button>
+            </form>  
           </div>  
           <div>
             <form id="info" style="display:none">
             <br>
-            First name:<br>
+            Select User Type:<br>
+            <select>
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+              <option value="administrator">Administrator</option>
+            </select>
+            <br> 
+            First Name:<br>
             <input type="text" name="firstname"><br>
-            Last name:<br>
-            <input type="text" name="lastname"><br><br>
-            <button type="button" id="addbutton">Add Student</button>
+            Last Name:<br>
+            <input type="text" name="lastname"><br>
+            Address:<br>
+            <input type="text" name="address"><br>
+            Address 2:<br>
+            <input type="text" name="address2"><br>
+            State:<br>
+            <input type="text" name="state"><br>
+            Zipcode:<br>
+            <input type="text" name="zip"><br>
+            Phone Number:<br>
+            <input type="text" name="phonenumber"><br><br>
+            <button type="button" id="addbutton">Add User</button>
             </form>
           </div>
           <div>
@@ -94,6 +113,19 @@
             <input type="text" name="lastname">&nbsp;&nbsp;
             <button type="button" id="searchbutton">Search</button>
             </form>
+          </div>
+          <div>
+            <form id="passChange" style="display:none">
+            <br>
+            <h2>Change Password</h2>
+            UserName:<br>
+            <input type="text" name="username"><br>
+            Enter New Password:<br>
+            <input type="text" name="newpass"><br>
+            Confirm Password:<br>
+            <input type="text" name="newpass2"><br><br>
+            <button type="button" id="searchbutton">Change Password</button>
+            </form>
           </div>    
 
           <script type="text/javascript">
@@ -101,8 +133,8 @@
             $(function(){
 
               $('#addRemStu').click(function(){
-                $('#add').css("display", "inline");
-                $('#rem').css("display", "inline");
+                $('#firstbuttons').css("display", "inline");
+                $('#passChange').css("display", "none");
               });
 
               $('#add').click(function(){
@@ -112,7 +144,15 @@
 
               $('#rem').click(function(){
                 $('#info').css("display", "none");
+                $('#passChange').css("display", "none");
                 $('#removeSearch').css("display", "inline");
+              });
+
+              $('#changepass').click(function(){
+                $('#info').css("display", "none");
+                $('#removeSearch').css("display", "none");
+                $('#firstbuttons').css("display", "none");
+                $('#passChange').css("display", "inline");
               });
 
             });

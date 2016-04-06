@@ -18,7 +18,7 @@ form {
   font-size: 1.2em;
 }
 
-button {
+button, select {
   color: #428bca;
   font-size: 1.2em;
   background-color: #000000;
