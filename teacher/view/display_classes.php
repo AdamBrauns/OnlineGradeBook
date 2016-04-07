@@ -82,7 +82,7 @@
 
   </head>
 
-  <body>
+  <body style="color:white !important;">
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -121,20 +121,27 @@
 $conn = new mysqli('localhost', 'root', 'SoftEng476', 'cs476') 
 or die ('Cannot connect to db');
 
-    $result = $conn->query("select courseID, courseName from Course");
+    $result = $conn->query("select Class.classID, Course.courseName, Class.sectionID from Class, Course
+							where Course.courseID=Class.courseID and Class.semesterID=1");
 
-    echo "<select name='courseID'>";
-
+    //echo "<select name='courseID'>";
+	echo "<table class='table table-bordered'><thread class='t-head'><tr><td></td><td>Class Name</td><td>Class Section</td></tr>";
     while ($row = $result->fetch_assoc()) {
-
-                  unset($courseID, $courseName);
-                  $courseID = $row['courseID'];
-                  $courseName = $row['courseName']; 
-                  echo '<option value="'.$courseID.'">'.$courseName.'</option>';
+				$classID = $row[classID];
+				$classN = $row[courseName];
+				$sectionID = $row[sectionID];
+				echo "<tr><td><form method='post' action='./display_gradebook.php?classID=".$classID."'><button type='submit'>Select</button><input type='hidden' name='action' value='select_gradebook'/>";
+				//echo "<input type='hidden' name='cid' value='".$classID."'</form></td>";
+				echo "<td>".$classN."</td><td>".$sectionID." ".$classID."</td></tr>";
+                  //unset($courseID, $courseName);
+                  //$courseID = $row['courseID'];
+                  //$courseName = $row['courseName']; 
+                  //echo '<option value="'.$courseID.'">'.$courseName.'</option>';
 
 }
 
     echo "</select>";
+	
 ?>
 
 
