@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,8 +33,11 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="dash.html">Dashboard</a></li>
+            <li><a href="#">Directory Search</a></li>
           </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
         </div>
       </div>
     </nav>
@@ -43,13 +45,13 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-12 main">
-          <h1 class="page-header">Directory Search</h1>
+          <h1 class="page-header">Dashboard</h1>
         </div>
       </div>
     </div>
 <div class="container">
   <div class="jumbotron">
-    <h1>Welcome to the Directory Search</h1> 
+    <h1>Welcome to the Gradebook Search</h1> 
     <div class="col-md-6 col-centered">
     <p>Type in a last name to search.</p>
 	    <form  method="post" action="search.php?go"  id="searchform"> 
@@ -76,7 +78,7 @@
 					$idNumber=$row['idNumber'];
 			//-display the result of the array
 			echo "<ul>\n";
-			echo  "<li>" . "<a  href=\"search_display.php?idNumber=$idNumber\">"   .$firstName . " " . $lastName . " " .$idNumber ."</a></li>\n";
+			echo "<li>" . "<a  href=\"search_display.php?idNumber=$idNumber\">"   .$firstName . " " . $lastName . " " . $idNumber . "</a></li>\n";
 			echo "</ul>";
 			}
 			}
@@ -105,10 +107,38 @@
 				$idNumber=$row['idNumber'];
 			//-display  the result of the array
 			echo  "<ul>\n";
-			echo  "<li>" . "<a  href=\"search_display.php?idNumber=$idNumber\">"   .$firstName . " " . $lastName . " " .$idNumber ."</a></li>\n";
+			echo  "<li>" . "<a  href=\"search_display.php?idNumber=$idNumber\">"   .$firstName . " " . $lastName . " " .$idNumber . "</a></li>\n";
 			echo  "</ul>";
 			}
 			}
+				if(isset($_GET['idNumber'])){
+				$idNumber=$_GET['idNumber'];
+				$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
+				//-query  the database table
+				$sql="SELECT  * FROM Contact WHERE idNumber = '".$idNumber."'";
+				
+				// Prepare statement
+				$mydb=mysql_select_db("cs476");
+				$result=mysql_query($sql);
+
+			while($row=mysql_fetch_array($result)){
+				$idNumber=$row['idNumber'];
+				$phoneNumber=$row['phoneNumber'];
+				$emailAddress=$row['emailAddress'];
+				$addressLine1=$row['addressLine1'];
+				$addressLine2=$row['addressLine2'];
+				$stateID=$row['stateID'];
+				$zipcode=$row['zipcode'];
+				
+				//-display  the result of the array
+				echo  "<ul>\n";
+				echo  "<li>"   .$firstName . " " . $lastName . " " .$idNumber ."</a></li>\n";
+				echo  "<li>"   .$phoneNumber . " " . $emailAddress ."</a></li>\n";
+				echo  "<li>"   .$addressLine1 . " " . $addressLine2 ."</a></li>\n";
+				echo  "<li>"   .$stateID . " " . $zipcode ."</a></li>\n";
+				echo  "</ul>";
+				}
+				}
 			?>
       </div>
   </div>
@@ -120,6 +150,7 @@
     <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
   </body>
 </html>
+
 
 
 

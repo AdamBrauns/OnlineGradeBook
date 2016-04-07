@@ -34,13 +34,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Add Gradebook</a></li>
+            <li><a href="dash.html">Dashboard</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
         </div>
       </div>
     </nav>
@@ -48,7 +43,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-12 main">
-          <h1 class="page-header">Dashboard</h1>
+          <h1 class="page-header">Class List</h1>
         </div>
       </div>
     </div>

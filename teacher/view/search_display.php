@@ -33,11 +33,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Directory Search</a></li>
+            <li><a href="dash.html">Dashboard</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
         </div>
       </div>
     </nav>
@@ -45,13 +42,13 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-12 main">
-          <h1 class="page-header">Dashboard</h1>
+          <h1 class="page-header">Directory Search</h1>
         </div>
       </div>
     </div>
 <div class="container">
   <div class="jumbotron">
-    <h1>Welcome to the Gradebook Search</h1> 
+    <h1>Welcome to the Directory Search</h1> 
     <div class="col-md-6 col-centered">
     <p>Type in a last name to search.</p>
 	    <form  method="post" action="search.php?go"  id="searchform"> 
