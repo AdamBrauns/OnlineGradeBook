@@ -72,10 +72,16 @@
               <img src="assets/img/password.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4><a id="changepass">Change Password</a></h4>
             </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="assets/img/enroll.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4><a id="enroll">Manage Enrollment</a></h4>
+            </div>
           </div>
+          <h1 class="page-header" id="headsub"></h1>
           <div id="test">
           <div>
             <form id="firstbuttons" style="display:none">
+              <h2 style="text-decoration: underline;">Add/Remove Users</h2><br>
               <button type="button" id="add">Add User</button>
               <button type="button" id="rem">Remove User</button>
             </form>  
@@ -117,8 +123,7 @@
           </div>
           <div>
             <form id="passChange" style="display:none">
-            <br>
-            <h2>Change Password</h2>
+            <h2 style="text-decoration: underline;">Change Password</h2><br>
             Username:<br>
             <input type="text" name="username"><br>
             Enter New Password:<br>
@@ -126,6 +131,24 @@
             Confirm Password:<br>
             <input type="text" name="newpass2"><br><br>
             <button type="button" id="searchbutton">Change Password</button>
+            </form>
+          </div>
+           <div>
+            <form id="enrollform" style="display:none">
+            <h2 style="text-decoration: underline;">Manage Enrollment</h2>
+            <br>
+            Select User Type:<br>
+            <select>
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+            </select>
+            <br> 
+            Username:<br>
+            <input type="text" name="firstname"><br>
+            Course:<br>
+            <input type="text" name="course"><br><br>
+            <button type="button">Add</button>
+            <button type="button">Remove</button>
             </form>
           </div>    
           </div>
@@ -135,17 +158,20 @@
 
               $('#addRemStu').click(function(){
                 $('#passChange').css("display", "none");
+                $('#enrollform').css("display", "none");
                 $('#firstbuttons').css("display", "inline");
               });
 
               $('#add').click(function(){
                 $('#removeSearch').css("display", "none");
+                $('#enrollform').css("display", "none");
                 $('#info').css("display", "inline");
               });
 
               $('#rem').click(function(){
                 $('#info').css("display", "none");
                 $('#passChange').css("display", "none");
+                $('#enrollform').css("display", "none");
                 $('#removeSearch').css("display", "inline");
               });
 
@@ -153,9 +179,17 @@
                 $('#info').css("display", "none");
                 $('#removeSearch').css("display", "none");
                 $('#firstbuttons').css("display", "none");
+                $('#enrollform').css("display", "none");
                 $('#passChange').css("display", "inline");
               });
 
+              $('#enroll').click(function(){
+                $('#info').css("display", "none");
+                $('#removeSearch').css("display", "none");
+                $('#firstbuttons').css("display", "none");
+                $('#passChange').css("display", "none");
+                $('#enrollform').css("display", "inline");
+              });
             });
 
           </script>
