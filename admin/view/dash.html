@@ -73,6 +73,7 @@
               <h4><a id="changepass">Change Password</a></h4>
             </div>
           </div>
+          <div id="test">
           <div>
             <form id="firstbuttons" style="display:none">
               <button type="button" id="add">Add User</button>
@@ -109,16 +110,16 @@
           <div>
             <form id="removeSearch" style="display:none">
             <br>
-            Search Last Name:<br>
+            Username:<br>
             <input type="text" name="lastname">&nbsp;&nbsp;
-            <button type="button" id="searchbutton">Search</button>
+            <button type="button" id="searchbutton">Remove User</button>
             </form>
           </div>
           <div>
             <form id="passChange" style="display:none">
             <br>
             <h2>Change Password</h2>
-            UserName:<br>
+            Username:<br>
             <input type="text" name="username"><br>
             Enter New Password:<br>
             <input type="text" name="newpass"><br>
@@ -127,14 +128,14 @@
             <button type="button" id="searchbutton">Change Password</button>
             </form>
           </div>    
-
+          </div>
           <script type="text/javascript">
 
             $(function(){
 
               $('#addRemStu').click(function(){
-                $('#firstbuttons').css("display", "inline");
                 $('#passChange').css("display", "none");
+                $('#firstbuttons').css("display", "inline");
               });
 
               $('#add').click(function(){

@@ -18,6 +18,10 @@ form {
   font-size: 1.2em;
 }
 
+#test{
+  text-align: center;
+}
+
 button, select {
   color: #428bca;
   font-size: 1.2em;
