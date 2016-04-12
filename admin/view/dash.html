@@ -66,7 +66,7 @@
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="assets/img/classes.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4><a href="">Add/Remove Classes</a></h4>
+              <h4><a id="addRemClass">Add/Remove Classes</a></h4>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="assets/img/password.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
@@ -122,6 +122,29 @@
             </form>
           </div>
           <div>
+            <form id="classbuttons" style="display:none">
+              <h2 style="text-decoration: underline;">Add/Remove Classes</h2><br>
+              <button type="button" id="addc">Add Class</button>
+              <button type="button" id="remc">Remove Class</button>
+            </form>  
+          </div>
+          <div>
+            <form id="addclass" style="display:none">
+              <br>Course Name:<br>
+              <input type="text" name="coursename"><br>
+              Course Description:<br>
+              <input type="text" name="coursedesc"><br><br>
+              <button type="button" id="searchbutton">Add Class</button>
+            </form>  
+          </div>
+          <div>
+            <form id="remclass" style="display:none">
+              <br>Course Name:<br>
+              <input type="text" name="coursename"><br><br>
+              <button type="button" id="searchbutton">Remove Course</button>
+            </form>  
+          </div>  
+          <div>
             <form id="passChange" style="display:none">
             <h2 style="text-decoration: underline;">Change Password</h2><br>
             Username:<br>
@@ -133,7 +156,7 @@
             <button type="button" id="searchbutton">Change Password</button>
             </form>
           </div>
-           <div>
+          <div>
             <form id="enrollform" style="display:none">
             <h2 style="text-decoration: underline;">Manage Enrollment</h2>
             <br>
@@ -159,6 +182,9 @@
               $('#addRemStu').click(function(){
                 $('#passChange').css("display", "none");
                 $('#enrollform').css("display", "none");
+                $('#classbuttons').css("display", "none");
+                $('#remclass').css("display", "none");
+                $('#addclass').css("display", "none");
                 $('#firstbuttons').css("display", "inline");
               });
 
@@ -172,14 +198,38 @@
                 $('#info').css("display", "none");
                 $('#passChange').css("display", "none");
                 $('#enrollform').css("display", "none");
+                $('#remclass').css("display", "none");
+                $('#addclass').css("display", "none");
                 $('#removeSearch').css("display", "inline");
               });
+
+              $('#addRemClass').click(function(){
+                $('#info').css("display", "none");
+                $('#removeSearch').css("display", "none");
+                $('#firstbuttons').css("display", "none");
+                $('#passChange').css("display", "none");
+                $('#enrollform').css("display", "none");
+                $('#classbuttons').css("display", "inline");
+              });
+
+              $('#addc').click(function(){
+                $('#remclass').css("display", "none");
+                $('#addclass').css("display", "inline");
+              });  
+
+              $('#remc').click(function(){
+                $('#addclass').css("display", "none");
+                $('#remclass').css("display", "inline");
+              });  
 
               $('#changepass').click(function(){
                 $('#info').css("display", "none");
                 $('#removeSearch').css("display", "none");
                 $('#firstbuttons').css("display", "none");
                 $('#enrollform').css("display", "none");
+                $('#classbuttons').css("display", "none");
+                $('#remclass').css("display", "none");
+                $('#addclass').css("display", "none");
                 $('#passChange').css("display", "inline");
               });
 
@@ -188,6 +238,9 @@
                 $('#removeSearch').css("display", "none");
                 $('#firstbuttons').css("display", "none");
                 $('#passChange').css("display", "none");
+                $('#classbuttons').css("display", "none");
+                $('#remclass').css("display", "none");
+                $('#addclass').css("display", "none");
                 $('#enrollform').css("display", "inline");
               });
             });
