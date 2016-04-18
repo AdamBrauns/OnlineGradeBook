@@ -84,8 +84,8 @@
               <h2 style="text-decoration: underline;">Add/Remove Users</h2><br>
               <button type="button" id="add">Add User</button>
               <button type="button" id="rem">Remove User</button>
-            </form>  
-          </div>  
+            </form>
+          </div>
           <div>
             <form id="info" style="display:none">
             <br>
@@ -95,7 +95,7 @@
               <option value="teacher">Teacher</option>
               <option value="administrator">Administrator</option>
             </select>
-            <br> 
+            <br>
             ID Number:<br>
             <input type="text" name="idnumber"><br>
             Username:<br>
@@ -116,52 +116,51 @@
             <input type="text" name="zip"><br>
             Phone Number:<br>
             <input type="text" name="phonenumber"><br><br>
-            
+
             <button type="button" id="addbutton">Add User</button>
             </form>
-            
-            <!-- SQL functionality to ADD USER goes here -->
-            
-            
-            <?php
-            if(isset($_POST['submit'])){
-		        if(isset($_GET['go'])){
-			      if(preg_match("/^[  a-zA-Z]+/", $_POST['name'])){
-			        //populate variables from the form
-			      $idnumber=$_POST['idnumber'];
-			      $username=$_POST['username'];
-			      $password=$_POST['password'];
-			      $firstname=$_POST['firstname'];
-			      $lastname=$_POST['lastname'];
-			      $address=$_POST['address'];
-			      $address2=$_POST['address2'];
-			      $state=$_POST['state'];
-			      $zip=$_POST['zip'];
-			      $phonenumber=$_POST['phonenumber'];
-			      $password=$_POST['password'];
-			        //connect  to the database
-			      $db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
-			        // - select  the database to use
-			      $mydb=mysql_select_db("cs476");
-			      
-			        // - set up the SQL statement for 'AUTHENTICATION'
-			      $sql="INSERT INTO `cs476`.`Authentication` (`idNumber`, `username`, `password`) VALUES ('$idnumber', '$username', '$password');
-			       // - run the SQL satatment
-			      if ($conn->query($sql) === TRUE) {
-    				echo "Data in 'Authentication' successfully populated!";
-    			      }
-    			      else {
-    				echo "Error: " . $sql . "<br>" . mysql_error();
-			      }
-			      
 
-			       //$conn->close();  Do we need this???
-?> 
-			      
-            }
-            }
-            ?>
-            
+            <!-- SQL functionality to ADD USER goes here -->
+
+
+            <?php
+
+
+
+            if(isset($_POST['submit'])){
+				if(preg_match("/^[  a-zA-Z]+/", $_POST['name'])){
+			    	  //populate variables from the form
+			      	$idnumber=$_POST['idnumber'];
+			      	$username=$_POST['username'];
+			     	$password=$_POST['password'];
+			      	$firstname=$_POST['firstname'];
+			     	$lastname=$_POST['lastname'];
+			     	$address=$_POST['address'];
+			      	$address2=$_POST['address2'];
+			      	$state=$_POST['state'];
+			      	$zip=$_POST['zip'];
+			      	$phonenumber=$_POST['phonenumber'];
+			      	$password=$_POST['password'];
+			          //connect  to the database
+			      	$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
+			          // select  the database to use
+			      	$mydb=mysql_select_db("cs476");
+			          //set up the SQL statement for 'AUTHENTICATION'
+			      	$sql="INSERT INTO `cs476`.`Authentication` (`idNumber`, `username`, `password`) VALUES ('$idnumber', '$username', '$password')";
+			          //run the SQL satatment
+
+			      	$result = mysql_query($sql);
+
+			      	$db->close();
+				}
+			}
+
+
+
+
+			?>
+
+
           </div>
           <div>
             <form id="removeSearch" style="display:none">
@@ -176,7 +175,7 @@
               <h2 style="text-decoration: underline;">Add/Remove Classes</h2><br>
               <button type="button" id="addc">Add Class</button>
               <button type="button" id="remc">Remove Class</button>
-            </form>  
+            </form>
           </div>
           <div>
             <form id="addclass" style="display:none">
@@ -185,15 +184,15 @@
               Course Description:<br>
               <input type="text" name="coursedesc"><br><br>
               <button type="button" id="addClassButton">Add Class</button>
-            </form>  
+            </form>
           </div>
           <div>
             <form id="remclass" style="display:none">
               <br>Course Name:<br>
               <input type="text" name="coursename"><br><br>
               <button type="button" id="removeCourseButton">Remove Course</button>
-            </form>  
-          </div>  
+            </form>
+          </div>
           <div>
             <form id="passChange" style="display:none">
             <h2 style="text-decoration: underline;">Change Password</h2><br>
@@ -215,7 +214,7 @@
               <option value="student">Student</option>
               <option value="teacher">Teacher</option>
             </select>
-            <br> 
+            <br>
             User ID:<br>
             <input type="text" name="firstname"><br>
             Course:<br>
@@ -223,7 +222,7 @@
             <button type="button">Add</button>
             <button type="button">Remove</button>
             </form>
-          </div>    
+          </div>
           </div>
           <script type="text/javascript">
 
@@ -265,12 +264,12 @@
               $('#addc').click(function(){
                 $('#remclass').css("display", "none");
                 $('#addclass').css("display", "inline");
-              });  
+              });
 
               $('#remc').click(function(){
                 $('#addclass').css("display", "none");
                 $('#remclass').css("display", "inline");
-              });  
+              });
 
               $('#changepass').click(function(){
                 $('#info').css("display", "none");
