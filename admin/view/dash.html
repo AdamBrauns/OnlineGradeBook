@@ -96,6 +96,10 @@
               <option value="administrator">Administrator</option>
             </select>
             <br> 
+            Username:<br>
+            <input type="text" name="username"><br>
+            Password:<br>
+            <input type="text" name="password"><br>
             First Name:<br>
             <input type="text" name="firstname"><br>
             Last Name:<br>
@@ -114,6 +118,35 @@
             <input type="text" name="password"><br><br>
             <button type="button" id="addbutton">Add User</button>
             </form>
+            
+            <!-- SQL functionality to ADD USER goes here -->
+            
+            
+            <?php
+            if(isset($_POST['submit'])){
+		        if(isset($_GET['go'])){
+			      if(preg_match("/^[  a-zA-Z]+/", $_POST['name'])){
+			        //populate variables from the form
+			      $username=$_POST['username'];
+			      $password=$_POST['password'];
+			      $firstname=$_POST['firstname'];
+			      $lastname=$_POST['lastname'];
+			      $address=$_POST['address'];
+			      $address2=$_POST['address2'];
+			      $state=$_POST['state'];
+			      $zip=$_POST['zip'];
+			      $phonenumber=$_POST['phonenumber'];
+			      $password=$_POST['password'];
+			        //connect  to the database
+			      $db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
+			        //-select  the database to use
+			      $mydb=mysql_select_db("cs476");
+			        //-query  the database table
+			      $sql="SELECT  idNumber, firstName, lastName FROM Users WHERE firstName LIKE '%" . $name .  "%' OR lastName LIKE '%" . $name ."%'";
+            }
+            }
+            ?>
+            
           </div>
           <div>
             <form id="removeSearch" style="display:none">
