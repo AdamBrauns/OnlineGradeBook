@@ -141,10 +141,23 @@
 			      $password=$_POST['password'];
 			        //connect  to the database
 			      $db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
-			        //-select  the database to use
+			        // - select  the database to use
 			      $mydb=mysql_select_db("cs476");
-			        //-query  the database table
-			      $sql="SELECT  idNumber, firstName, lastName FROM Users WHERE firstName LIKE '%" . $name .  "%' OR lastName LIKE '%" . $name ."%'";
+			      
+			        // - set up the SQL statement for 'AUTHENTICATION'
+			      $sql="INSERT INTO `cs476`.`Authentication` (`idNumber`, `username`, `password`) VALUES ('$idnumber', '$username', '$password');
+			       // - run the SQL satatment
+			      if ($conn->query($sql) === TRUE) {
+    				echo "Data in 'Authentication' successfully populated!";
+    			      }
+    			      else {
+    				echo "Error: " . $sql . "<br>" . mysql_error();
+			      }
+			      
+
+			       //$conn->close();  Do we need this???
+?> 
+			      
             }
             }
             ?>
