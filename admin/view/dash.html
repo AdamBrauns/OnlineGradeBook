@@ -96,6 +96,8 @@
               <option value="administrator">Administrator</option>
             </select>
             <br> 
+            ID Number:<br>
+            <input type="text" name="idnumber"><br>
             Username:<br>
             <input type="text" name="username"><br>
             Password:<br>
@@ -127,6 +129,7 @@
 		        if(isset($_GET['go'])){
 			      if(preg_match("/^[  a-zA-Z]+/", $_POST['name'])){
 			        //populate variables from the form
+			      $idnumber=$_POST['idnumber'];
 			      $username=$_POST['username'];
 			      $password=$_POST['password'];
 			      $firstname=$_POST['firstname'];
