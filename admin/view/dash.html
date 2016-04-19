@@ -98,6 +98,8 @@
             <br>
             ID Number:<br>
             <input type="text" name="idnumber"><br>
+            Email Address:<br>
+            <input type="text" name="emailaddress"><br>
             Username:<br>
             <input type="text" name="username"><br>
             Password:<br>
@@ -117,50 +119,8 @@
             Phone Number:<br>
             <input type="text" name="phonenumber"><br><br>
 
-            <button type="button" id="addbutton">Add User</button>
+            <button type="button" id="addbutton" name="addbutton">Submit</button>
             </form>
-
-            <!-- SQL functionality to ADD USER goes here -->
-
-
-            <?php
-
-
-
-            if(isset($_POST['submit'])){
-				if(preg_match("/^[  a-zA-Z]+/", $_POST['name'])){
-			    	  //populate variables from the form
-			      	$idnumber=$_POST['idnumber'];
-			      	$username=$_POST['username'];
-			     	$password=$_POST['password'];
-			      	$firstname=$_POST['firstname'];
-			     	$lastname=$_POST['lastname'];
-			     	$address=$_POST['address'];
-			      	$address2=$_POST['address2'];
-			      	$state=$_POST['state'];
-			      	$zip=$_POST['zip'];
-			      	$phonenumber=$_POST['phonenumber'];
-			      	$password=$_POST['password'];
-			          //connect  to the database
-			      	$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
-			          // select  the database to use
-			      	$mydb=mysql_select_db("cs476");
-			          //set up the SQL statement for 'AUTHENTICATION'
-			      	$sql="INSERT INTO `cs476`.`Authentication` (`idNumber`, `username`, `password`) VALUES ('$idnumber', '$username', '$password')";
-			          //run the SQL satatment
-
-			      	$result = mysql_query($sql);
-
-			      	$db->close();
-				}
-			}
-
-
-
-
-			?>
-
-
           </div>
           <div>
             <form id="removeSearch" style="display:none">
@@ -227,6 +187,7 @@
           <script type="text/javascript">
 
             $(function(){
+
 
               $('#addRemStu').click(function(){
                 $('#passChange').css("display", "none");
@@ -423,6 +384,49 @@
               </tbody>
             </table>
           </div>-->
+
+
+			<?php
+
+		        	if(isset($_POST['addbutton'])){
+		  			    	  //populate variables from the form
+		  			      	$idnumber=$_POST['idnumber'];
+		  			      	$emailaddress=$_POST['emailaddress'];
+		  			      	$username=$_POST['username'];
+		  			     	$password=$_POST['password'];
+		  			      	$firstname=$_POST['firstname'];
+		  			     	$lastname=$_POST['lastname'];
+		  			     	$address=$_POST['address'];
+		  			      	$address2=$_POST['address2'];
+		  			      	$state=$_POST['state'];
+		  			      	$zip=$_POST['zip'];
+		  			      	$phonenumber=$_POST['phonenumber'];
+		  			      	$password=$_POST['password'];
+		  			          //connect  to the database
+		  			      	$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
+		  			          // select  the database to use
+		  			      	$mydb=mysql_select_db("cs476");
+
+		  			          //set up the SQL statement for 'AUTHENTICATION'
+		  			      	$sql="INSERT INTO `cs476`.`Authentication` (`idNumber`, `username`, `password`) VALUES ('".$idnumber."', '".$username."', '".$password."')";
+		  			          //run the SQL statement
+							mysql_query($sql);
+
+							  //set up the SQL statement for 'CONTACT'
+							$sql="INSERT INTO `cs476`.`Contact` (`idNumber`, `phoneNumber`, `emailAddress`, `addressLine1`, `addressLine2`, `stateID`, `zipcode`) VALUES ('".$idnumber."', '".$phonenumber."', '".$emailaddress."', '".$address."', '".$address2."', '".$state."', '".$zip."')";
+							  //run the SQL statement
+							mysql_query($sql);
+
+
+		  			}
+
+		  			?>
+
+
+
+
+
+
         </div>
       </div>
     </div>
