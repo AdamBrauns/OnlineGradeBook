@@ -90,7 +90,7 @@
             <form id="info" style="display:none">
             <br>
             Select User Type:<br>
-            <select>
+            <select name = "userType">
               <option value="student">Student</option>
               <option value="teacher">Teacher</option>
               <option value="administrator">Administrator</option>
@@ -125,9 +125,9 @@
           <div>
             <form id="removeSearch" style="display:none">
             <br>
-            Username:<br>
-            <input type="text" name="lastname">&nbsp;&nbsp;
-            <button type="button" id="removeUserButton">Remove User</button>
+            User ID:<br>
+            <input type="text" name="removeuserid">&nbsp;&nbsp;
+            <button type="button" id="removeUserButton" name="removeUserButton">Remove User</button>
             </form>
           </div>
           <div>
@@ -149,15 +149,15 @@
           <div>
             <form id="remclass" style="display:none">
               <br>Course Name:<br>
-              <input type="text" name="coursename"><br><br>
-              <button type="button" id="removeCourseButton">Remove Course</button>
+              <input type="text" name="removeclassid"><br><br>
+              <button type="button" id="removeClassButton">Remove Class</button>
             </form>
           </div>
           <div>
             <form id="passChange" style="display:none">
             <h2 style="text-decoration: underline;">Change Password</h2><br>
-            Username:<br>
-            <input type="text" name="username"><br>
+            User ID:<br>
+            <input type="text" name="changeuserid  "><br>
             Enter New Password:<br>
             <input type="text" name="newpass"><br>
             Confirm Password:<br>
@@ -176,11 +176,11 @@
             </select>
             <br>
             User ID:<br>
-            <input type="text" name="firstname"><br>
+            <input type="text" name="enrollmentuserid"><br>
             Course:<br>
-            <input type="text" name="course"><br><br>
-            <button type="button">Add</button>
-            <button type="button">Remove</button>
+            <input type="text" name="enrollmentcourse"><br><br>
+            <button type="button" name="addEnrollment">Add</button>
+            <button type="button" name="removeEnrollment">Remove</button>
             </form>
           </div>
           </div>
@@ -387,9 +387,11 @@
 
 
 			<?php
-
+					<!--- ADD USER FUNCTIONALITY -->
 		        	if(isset($_POST['addbutton'])){
+
 		  			    	  //populate variables from the form
+		  			    	$usertype = $_POST['userType'];
 		  			      	$idnumber=$_POST['idnumber'];
 		  			      	$emailaddress=$_POST['emailaddress'];
 		  			      	$username=$_POST['username'];
@@ -402,6 +404,7 @@
 		  			      	$zip=$_POST['zip'];
 		  			      	$phonenumber=$_POST['phonenumber'];
 		  			      	$password=$_POST['password'];
+
 		  			          //connect  to the database
 		  			      	$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
 		  			          // select  the database to use
@@ -417,9 +420,111 @@
 							  //run the SQL statement
 							mysql_query($sql);
 
-
+							  //set up the SQL statement for 'USERS'
+							$sql= "INSERT INTO `cs476`.`Users` (`idNumber`, `userType`, `lastName`, `firstName`) VALUES ('".$idnumber."', '".$usertype."', '".$lastname."', '".$firstname."')";
+							mysql_query($sql);
 		  			}
 
+					<!-- REMOVE USER FUNCTIONALITY -->
+					if(isset($_POST['removeUserButton'])){
+							$removeuserid = $_POST['removeuserid'];
+
+							  //connect  to the database
+							$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
+							  // select  the database to use
+		  			      	$mydb=mysql_select_db("cs476");
+
+		  			      	  //set up the SQL statement for 'Authentication'
+							$sql= "DELETE FROM `cs476`.`Authentication` WHERE `Authentication`.`idnumber` = ".$removeuserid;
+							mysql_query($sql);
+
+							  //set up the SQL statement for 'CONTACT'
+							$sql= "DELETE FROM `cs476`.`Contact` WHERE `Contact`.`idnumber` = ".$removeuserid;
+							mysql_query($sql);
+
+							  //set up the SQL statement for 'USERS'
+							$sql= "DELETE FROM `cs476`.`Users` WHERE `Users`.`idnumber` = ".$removeuserid;
+							mysql_query($sql);
+					}
+
+					<!-- ADD CLASS FUNCTIONALITY -->
+					if(isset($_POST['addClassButton'])){
+						$coursename = $_POST['coursename'];
+						$coursedesc = $_POST['coursedesc'];
+
+						  //connect  to the database
+						$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
+						  // select  the database to use
+		  			    $mydb=mysql_select_db("cs476");
+
+		  			      //set up the SQL statement for 'Authentication'
+						$sql= "INSERT INTO `cs476`.`Course` (`courseID`, `courseName`, `courseDescription`) VALUES (NULL, '".$coursename."', '".$coursedesc."')";
+						mysql_query($sql);
+
+					}
+
+					<!-- REMOVE CLASS FUNCTIONALITY -->
+					if(isset($_POST['removeClassButton'])){
+						$removeclassid = $_POST['removeclassid'];
+
+
+						  //connect  to the database
+						$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
+					      // select  the database to use
+						$mydb=mysql_select_db("cs476");
+
+						 //set up the SQL statement for 'Authentication'
+						$sql= "DELETE FROM `cs476`.`Course` WHERE `Course`.`courseID` = ".$removeclassid;
+						mysql_query($sql);
+
+					}
+
+					<!-- UPDATE PASSWORD FUNCTIONALITY -->
+					if(isset($_POST['changePasswordButton'])){
+						$changeuserid = $_POST['changeuserid'];
+						$newpass = $_POST['newpass'];
+						$newpass2 = $_POST['newpass2'];
+
+						  //check if both passwords match
+						if (newpass == newpass2){
+							  //connect  to the database
+							$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
+						 	  // select  the database to use
+							$mydb=mysql_select_db("cs476");
+
+						  	  //set up the SQL statement for 'Authentication'
+							$sql = "UPDATE  `cs476`.`Authentication` SET  `password` =  '".newpass."' WHERE  `Authentication`.`idNumber` =".$changeuserid;
+							mysql_query($sql);
+						}
+					}
+
+
+					<!-- ADD ENROLLMENT FUNCTIONALITY (LEFT INCOMPLETE!) -->
+					if(isset($_POST['addEnrollment'])){
+						$enrollmentuserid = $_POST['enrollmentuserid'];
+						$enrollmentcourse = $_POST['enrollmentcourse'];
+
+						  //connect  to the database
+						$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
+						  // select  the database to use
+					    $mydb=mysql_select_db("cs476");
+
+
+
+
+
+					}
+
+					<!-- REMOVE ENROLLMENT FUNCTIONALITY (LEFT INCOMPLETE!) -->
+					if(isset($_POST['removeEnrollment'])){
+						$enrollmentuserid = $_POST['enrollmentuserid'];
+						$enrollmentcourse = $_POST['enrollmentcourse'];
+
+						  //connect  to the database
+						$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
+						  // select  the database to use
+					    $mydb=mysql_select_db("cs476");
+					}
 		  			?>
 
 
