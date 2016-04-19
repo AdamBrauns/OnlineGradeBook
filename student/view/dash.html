@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gradebook Service Dashboard</title>
     <meta name="description" content="Dashboard for Gradebook">
-    <meta name="author" content="Grant Jones and Amber Thatcher">
+    <meta name="author" content="Amber Thatcher">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
     <title>Dashboard Template for Bootstrap</title>
@@ -31,7 +31,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Gradebook Service</a>
+         <!--<a class="navbar-brand" href="#">Gradebook Service</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -43,7 +43,7 @@
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
           </form>
-        </div>
+        </div>-->
       </div>
     </nav>
 
@@ -79,27 +79,27 @@
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="assets/img/submit.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4><a id="submit">Submit Assignments</a></h4>
+              <h4><a href="submit_assign.html">Submit Assignments</a></h4>
             </div>
             <div>
-              <form id="classbuttons" style="display:none">
-                <button type="button" id="classone">Class 1</button>
-                <br>
-                <br>
-                <button type="button" id="classtwo">Class 2</button>
-                <br>
-                <br>
-                <button type="button" id="classthree">Class 3</button>
-                <br>
-                <br>
-                <button type="button" id="classfour">Class 4</button>
-                <br>
-                <br>
-                <button type="button" id="classfive">Class 5</button>
-                <br>
-                <br>
+           <form id="classbuttons" style="display:none">
+              <form>
+              <input type="button" value="Class 1" onclick="window.location.href='grades.php'"/>
+              <br>
+              <br>
+              <input type="button" value="Class 2" onclick="window.location.href='grades.php'" />
+              <br>
+              <br>
+              <input type="button" value="Class 3" onclick="window.location.href='grades.php'" />
+              <br>
+              <br>
+              <input type="button" value="Class 4" onclick="window.location.href='grades.php'" />
+              <br>
+              <br>
+              <input type="button" value="Class 5" onclick="window.location.href='grades.php'" />
               </form>
-            </div>
+            </form> 
+            </div>   
             <div>
             <script type="text/javascript">
               $(function(){
@@ -107,23 +107,31 @@
                   $('#classbuttons').css("display", "inline");
                   $('#uploadButton').css("display", "none");
                 });
-                $('#submit').click(function(){
-                  $('#uploadButton').css("display", "inline");
-                  $('#classbuttons').css("display", "none");
+                $('#classone').click(function(){
+                  $('#grades').css("display", "inline");
                 });
-                
+                $('#classtwo').click(function(){
+                  $('#grades').css("display", "inline");
+                });
+                $('#classthree').click(function(){
+                  $('#grades').css("display", "inline");
+                });
+                $('#classfour').click(function(){
+                  $('#grades').css("display", "inline");
+                });
+                $('#classfive').click(function(){
+                  $('#grades').css("display", "inline");
+                });
+                $('#submit').click(function(){
+                  $('#submit_assign').css("display", "inline");
+                });
               });  
             </script>
-            <div class="fileUpload button button-primary">
+           
+            <!--<div class="fileUpload button button-primary">
                 <input id="uploadButton" type="file" class="upload" style="display:none"/>
-            </div>
-            <!--<div>
-              <script type="text/javascript">
-                  document.getElementById("uploadButton").onclick = function() {
-                      document.getElementById("uploadFile").value = this.value;
-                  };
-              </script>
             </div>-->
+            
           <!--<h2 class="sub-header">Section title</h2>
           <div class="table-responsive">
             <table class="table table-striped">
