@@ -31,31 +31,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Gradebook Service</a>
+          <a class="navbar-brand">Gradebook Service</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Add Gradebook</a></li>
+            <li><a href="dash.html">Dashboard</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
+          <!--<form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
-          </form>
+          </form>-->
         </div>
       </div>
     </nav>
 
     <div class="container-fluid">
       <div class="row">
-        <!--<div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Classes</a></li>
-            <li><a href="#">Students</a></li>
-            <li><a href="#">Gradebooks</a></li>
-          </ul>
-        </div>-->
         <div class="col-sm-12 main">
           <h1 class="page-header">Dashboard</h1>
 
@@ -84,26 +74,18 @@
               <h2 style="text-decoration: underline;">Add/Remove Users</h2><br>
               <button type="button" id="add">Add User</button>
               <button type="button" id="rem">Remove User</button>
-            </form>
-          </div>
+            </form>  
+          </div>  
           <div>
             <form id="info" style="display:none">
             <br>
             Select User Type:<br>
-            <select name = "userType">
+            <select>
               <option value="student">Student</option>
               <option value="teacher">Teacher</option>
               <option value="administrator">Administrator</option>
             </select>
-            <br>
-            ID Number:<br>
-            <input type="text" name="idnumber"><br>
-            Email Address:<br>
-            <input type="text" name="emailaddress"><br>
-            Username:<br>
-            <input type="text" name="username"><br>
-            Password:<br>
-            <input type="text" name="password"><br>
+            <br> 
             First Name:<br>
             <input type="text" name="firstname"><br>
             Last Name:<br>
@@ -117,17 +99,18 @@
             Zipcode:<br>
             <input type="text" name="zip"><br>
             Phone Number:<br>
-            <input type="text" name="phonenumber"><br><br>
-
-            <button type="button" id="addbutton" name="addbutton">Submit</button>
+            <input type="text" name="phonenumber"><br>
+            Password:<br>
+            <input type="text" name="password"><br><br>
+            <button type="button" id="addbutton">Add User</button>
             </form>
           </div>
           <div>
             <form id="removeSearch" style="display:none">
             <br>
-            User ID:<br>
-            <input type="text" name="removeuserid">&nbsp;&nbsp;
-            <button type="button" id="removeUserButton" name="removeUserButton">Remove User</button>
+            Username:<br>
+            <input type="text" name="lastname">&nbsp;&nbsp;
+            <button type="button" id="searchbutton">Remove User</button>
             </form>
           </div>
           <div>
@@ -135,7 +118,7 @@
               <h2 style="text-decoration: underline;">Add/Remove Classes</h2><br>
               <button type="button" id="addc">Add Class</button>
               <button type="button" id="remc">Remove Class</button>
-            </form>
+            </form>  
           </div>
           <div>
             <form id="addclass" style="display:none">
@@ -143,26 +126,26 @@
               <input type="text" name="coursename"><br>
               Course Description:<br>
               <input type="text" name="coursedesc"><br><br>
-              <button type="button" id="addClassButton">Add Class</button>
-            </form>
+              <button type="button" id="searchbutton">Add Class</button>
+            </form>  
           </div>
           <div>
             <form id="remclass" style="display:none">
               <br>Course Name:<br>
-              <input type="text" name="removeclassid"><br><br>
-              <button type="button" id="removeClassButton">Remove Class</button>
-            </form>
-          </div>
+              <input type="text" name="coursename"><br><br>
+              <button type="button" id="searchbutton">Remove Course</button>
+            </form>  
+          </div>  
           <div>
             <form id="passChange" style="display:none">
             <h2 style="text-decoration: underline;">Change Password</h2><br>
-            User ID:<br>
-            <input type="text" name="changeuserid  "><br>
+            Username:<br>
+            <input type="text" name="username"><br>
             Enter New Password:<br>
             <input type="text" name="newpass"><br>
             Confirm Password:<br>
             <input type="text" name="newpass2"><br><br>
-            <button type="button" id="changePasswordButton">Change Password</button>
+            <button type="button" id="searchbutton">Change Password</button>
             </form>
           </div>
           <div>
@@ -174,20 +157,19 @@
               <option value="student">Student</option>
               <option value="teacher">Teacher</option>
             </select>
-            <br>
+            <br> 
             User ID:<br>
-            <input type="text" name="enrollmentuserid"><br>
+            <input type="text" name="firstname"><br>
             Course:<br>
-            <input type="text" name="enrollmentcourse"><br><br>
-            <button type="button" name="addEnrollment">Add</button>
-            <button type="button" name="removeEnrollment">Remove</button>
+            <input type="text" name="course"><br><br>
+            <button type="button">Add</button>
+            <button type="button">Remove</button>
             </form>
-          </div>
+          </div>    
           </div>
           <script type="text/javascript">
 
             $(function(){
-
 
               $('#addRemStu').click(function(){
                 $('#passChange').css("display", "none");
@@ -225,12 +207,12 @@
               $('#addc').click(function(){
                 $('#remclass').css("display", "none");
                 $('#addclass').css("display", "inline");
-              });
+              });  
 
               $('#remc').click(function(){
                 $('#addclass').css("display", "none");
                 $('#remclass').css("display", "inline");
-              });
+              });  
 
               $('#changepass').click(function(){
                 $('#info').css("display", "none");
@@ -256,282 +238,6 @@
             });
 
           </script>
-          <!--<h2 class="sub-header">Section title</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>odio</td>
-                  <td>Praesent</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>libero</td>
-                  <td>Sed</td>
-                  <td>cursus</td>
-                  <td>ante</td>
-                </tr>
-                <tr>
-                  <td>1,004</td>
-                  <td>dapibus</td>
-                  <td>diam</td>
-                  <td>Sed</td>
-                  <td>nisi</td>
-                </tr>
-                <tr>
-                  <td>1,005</td>
-                  <td>Nulla</td>
-                  <td>quis</td>
-                  <td>sem</td>
-                  <td>at</td>
-                </tr>
-                <tr>
-                  <td>1,006</td>
-                  <td>nibh</td>
-                  <td>elementum</td>
-                  <td>imperdiet</td>
-                  <td>Duis</td>
-                </tr>
-                <tr>
-                  <td>1,007</td>
-                  <td>sagittis</td>
-                  <td>ipsum</td>
-                  <td>Praesent</td>
-                  <td>mauris</td>
-                </tr>
-                <tr>
-                  <td>1,008</td>
-                  <td>Fusce</td>
-                  <td>nec</td>
-                  <td>tellus</td>
-                  <td>sed</td>
-                </tr>
-                <tr>
-                  <td>1,009</td>
-                  <td>augue</td>
-                  <td>semper</td>
-                  <td>porta</td>
-                  <td>Mauris</td>
-                </tr>
-                <tr>
-                  <td>1,010</td>
-                  <td>massa</td>
-                  <td>Vestibulum</td>
-                  <td>lacinia</td>
-                  <td>arcu</td>
-                </tr>
-                <tr>
-                  <td>1,011</td>
-                  <td>eget</td>
-                  <td>nulla</td>
-                  <td>Class</td>
-                  <td>aptent</td>
-                </tr>
-                <tr>
-                  <td>1,012</td>
-                  <td>taciti</td>
-                  <td>sociosqu</td>
-                  <td>ad</td>
-                  <td>litora</td>
-                </tr>
-                <tr>
-                  <td>1,013</td>
-                  <td>torquent</td>
-                  <td>per</td>
-                  <td>conubia</td>
-                  <td>nostra</td>
-                </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>per</td>
-                  <td>inceptos</td>
-                  <td>himenaeos</td>
-                  <td>Curabitur</td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>sodales</td>
-                  <td>ligula</td>
-                  <td>in</td>
-                  <td>libero</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>-->
-
-
-			<?php
-					<!--- ADD USER FUNCTIONALITY -->
-		        	if(isset($_POST['addbutton'])){
-
-		  			    	  //populate variables from the form
-		  			    	$usertype = $_POST['userType'];
-		  			      	$idnumber=$_POST['idnumber'];
-		  			      	$emailaddress=$_POST['emailaddress'];
-		  			      	$username=$_POST['username'];
-		  			     	$password=$_POST['password'];
-		  			      	$firstname=$_POST['firstname'];
-		  			     	$lastname=$_POST['lastname'];
-		  			     	$address=$_POST['address'];
-		  			      	$address2=$_POST['address2'];
-		  			      	$state=$_POST['state'];
-		  			      	$zip=$_POST['zip'];
-		  			      	$phonenumber=$_POST['phonenumber'];
-		  			      	$password=$_POST['password'];
-
-		  			          //connect  to the database
-		  			      	$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
-		  			          // select  the database to use
-		  			      	$mydb=mysql_select_db("cs476");
-
-		  			          //set up the SQL statement for 'AUTHENTICATION'
-		  			      	$sql="INSERT INTO `cs476`.`Authentication` (`idNumber`, `username`, `password`) VALUES ('".$idnumber."', '".$username."', '".$password."')";
-		  			          //run the SQL statement
-							mysql_query($sql);
-
-							  //set up the SQL statement for 'CONTACT'
-							$sql="INSERT INTO `cs476`.`Contact` (`idNumber`, `phoneNumber`, `emailAddress`, `addressLine1`, `addressLine2`, `stateID`, `zipcode`) VALUES ('".$idnumber."', '".$phonenumber."', '".$emailaddress."', '".$address."', '".$address2."', '".$state."', '".$zip."')";
-							  //run the SQL statement
-							mysql_query($sql);
-
-							  //set up the SQL statement for 'USERS'
-							$sql= "INSERT INTO `cs476`.`Users` (`idNumber`, `userType`, `lastName`, `firstName`) VALUES ('".$idnumber."', '".$usertype."', '".$lastname."', '".$firstname."')";
-							mysql_query($sql);
-		  			}
-
-					<!-- REMOVE USER FUNCTIONALITY -->
-					if(isset($_POST['removeUserButton'])){
-							$removeuserid = $_POST['removeuserid'];
-
-							  //connect  to the database
-							$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
-							  // select  the database to use
-		  			      	$mydb=mysql_select_db("cs476");
-
-		  			      	  //set up the SQL statement for 'Authentication'
-							$sql= "DELETE FROM `cs476`.`Authentication` WHERE `Authentication`.`idnumber` = ".$removeuserid;
-							mysql_query($sql);
-
-							  //set up the SQL statement for 'CONTACT'
-							$sql= "DELETE FROM `cs476`.`Contact` WHERE `Contact`.`idnumber` = ".$removeuserid;
-							mysql_query($sql);
-
-							  //set up the SQL statement for 'USERS'
-							$sql= "DELETE FROM `cs476`.`Users` WHERE `Users`.`idnumber` = ".$removeuserid;
-							mysql_query($sql);
-					}
-
-					<!-- ADD CLASS FUNCTIONALITY -->
-					if(isset($_POST['addClassButton'])){
-						$coursename = $_POST['coursename'];
-						$coursedesc = $_POST['coursedesc'];
-
-						  //connect  to the database
-						$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
-						  // select  the database to use
-		  			    $mydb=mysql_select_db("cs476");
-
-		  			      //set up the SQL statement for 'Authentication'
-						$sql= "INSERT INTO `cs476`.`Course` (`courseID`, `courseName`, `courseDescription`) VALUES (NULL, '".$coursename."', '".$coursedesc."')";
-						mysql_query($sql);
-
-					}
-
-					<!-- REMOVE CLASS FUNCTIONALITY -->
-					if(isset($_POST['removeClassButton'])){
-						$removeclassid = $_POST['removeclassid'];
-
-
-						  //connect  to the database
-						$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
-					      // select  the database to use
-						$mydb=mysql_select_db("cs476");
-
-						 //set up the SQL statement for 'Authentication'
-						$sql= "DELETE FROM `cs476`.`Course` WHERE `Course`.`courseID` = ".$removeclassid;
-						mysql_query($sql);
-
-					}
-
-					<!-- UPDATE PASSWORD FUNCTIONALITY -->
-					if(isset($_POST['changePasswordButton'])){
-						$changeuserid = $_POST['changeuserid'];
-						$newpass = $_POST['newpass'];
-						$newpass2 = $_POST['newpass2'];
-
-						  //check if both passwords match
-						if (newpass == newpass2){
-							  //connect  to the database
-							$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
-						 	  // select  the database to use
-							$mydb=mysql_select_db("cs476");
-
-						  	  //set up the SQL statement for 'Authentication'
-							$sql = "UPDATE  `cs476`.`Authentication` SET  `password` =  '".newpass."' WHERE  `Authentication`.`idNumber` =".$changeuserid;
-							mysql_query($sql);
-						}
-					}
-
-
-					<!-- ADD ENROLLMENT FUNCTIONALITY (LEFT INCOMPLETE!) -->
-					if(isset($_POST['addEnrollment'])){
-						$enrollmentuserid = $_POST['enrollmentuserid'];
-						$enrollmentcourse = $_POST['enrollmentcourse'];
-
-						  //connect  to the database
-						$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
-						  // select  the database to use
-					    $mydb=mysql_select_db("cs476");
-
-
-
-
-
-					}
-
-					<!-- REMOVE ENROLLMENT FUNCTIONALITY (LEFT INCOMPLETE!) -->
-					if(isset($_POST['removeEnrollment'])){
-						$enrollmentuserid = $_POST['enrollmentuserid'];
-						$enrollmentcourse = $_POST['enrollmentcourse'];
-
-						  //connect  to the database
-						$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
-						  // select  the database to use
-					    $mydb=mysql_select_db("cs476");
-					}
-		  			?>
-
-
-
-
-
-
         </div>
       </div>
     </div>
