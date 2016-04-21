@@ -76,7 +76,7 @@
 					$idNumber=$row['idNumber'];
 			//-display the result of the array
 			echo "<ul>\n";
-			echo  "<li>" . "<a  href=\"search_display.php?idNumber=$idNumber\">"   .$firstName . " " . $lastName . " " .$idNumber ."</a></li>\n";
+			echo  "<li>" . "<a  href=\"search_display.php?idNumber=$idNumber\">"   .$firstName . " " . $lastName . ", ID Number =  " .$idNumber ."</a></li>\n";
 			echo "</ul>";
 			}
 			}
@@ -105,7 +105,7 @@
 				$idNumber=$row['idNumber'];
 			//-display  the result of the array
 			echo  "<ul>\n";
-			echo  "<li>" . "<a  href=\"search_display.php?idNumber=$idNumber\">"   .$firstName . " " . $lastName . " " .$idNumber ."</a></li>\n";
+			echo  "<li>" . "<a  href=\"search_display.php?idNumber=$idNumber\">"   .$firstName . " " . $lastName . ", ID Number =  " .$idNumber ."</a></li>\n";
 			echo  "</ul>";
 			}
 			}
