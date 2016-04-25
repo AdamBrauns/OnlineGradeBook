@@ -17,9 +17,7 @@
 
     <!-- Custom styles for this template -->
     <link href= "dist/css/dashboard.css" rel="stylesheet">
-    ></script>
 
-      <script type="text/javascript" src="//api.filestackapi.com/filestack.js"></script>
   </head>
 
   <body>
@@ -51,12 +49,28 @@
           <h1 class="page-header">Submit Assignments</h1>
         </div>
       </div>
+      <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="  
+        m1x98xq6rnpkgg6"></script>
+      <a href="https://dl.dropboxusercontent.com/s/deroi5nwm6u7gdf/advice.png" class="dropbox-saver"></a>
+      </div>
+      <script type="text/javascript"
+      var options = {
+        files: [
+          {'url': '...', 'filename': '...'},
+          {'url': '...', 'filename': '...'},          
+        ],
+        success: function() {
+          alert("Your files have saved to your Dropbox.");
+        },
+        progress: function(progress) {},
 
-<input type="filepicker" data-fp-apikey="AIHghbfTSr2BHVVwplaA2z"
-onchange="alert(event.fpfile.url)">
+        cancel: function() {},
 
-    </div>
-  
+        error: function (errorMessage) {}
+      };
+      var button = Dropbox.createSaveButton(options);
+      document.getElementById("container").appendChild(button);
+      </script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
