@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -6,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gradebook Service Dashboard</title>
     <meta name="description" content="Dashboard for Gradebook">
-    <meta name="author" content="Amber Thatcher">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <meta name="author" content="Grant Jones">
 
     <title>Dashboard Template for Bootstrap</title>
 
@@ -30,50 +28,49 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+          <a class="navbar-brand" href="#">Gradebook Service</a>
         </div>
-        <!--<div id="navbar" class="navbar-collapse collapse">
+        <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>-->
+            <li><a href="dash.php">Dashboard</a></li>
           </ul>
         </div>
       </div>
     </nav>
-
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-12-main">
-          <h1 class="page-header">Gradebook</h1>
-        </div>
-      </div>
-      </div>
-        <!-- Bootstrap core JavaScript
+	
+    <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
   </body>
 </html>
-
 <?php
 
-$conn = new mysqli('localhost', 'root', 'SoftEng476', 'cs476') or die ('cannot connect to db');
+$conn = new mysqli('localhost', 'root', 'SoftEng476', 'cs476') 
+or die ('Cannot connect to db');
 
-$result = $conn->query("select Gradebook.classID, Class where Gradebook.classID=Registers.classID, Assignment where Gradebook.assignmentID=Assignment.assignmentID");
+    $result2 = $conn->query("select Course.courseName, Class.sectionID from Class, Course
+							where Course.courseID=Class.courseID and Class.classID=".$_GET['classID']." and Class.semesterID=1");
+	$row2 = $result2->fetch_assoc();
+	echo "<h2> Grades for ".$row2['courseName']." section ".$row2['sectionID']."</h2>";
 
-echo "<table class='table table-bordered'><thread class='t-head'><tr><td></td><td>Assignment</td><td>Grade</td></tr>";
-  while ($row = $result->fetch_assoc()) {
-    $assignmentID = $row[assignmentID];
-    $grade = $row[grade];
+    $result = $conn->query("select Assignment.assignmentName, Assignment.dueDate, Gradebook.grade, Assignment.totalScore, Assignment.weight
+							from Gradebook, Users, Class, Assignment, Registers
+							where Registers.classID=".$_GET['classID']." and Registers.idNumber=100000 and Gradebook.classID=Registers.classID
+							and Gradebook.classID=Class.classID and Gradebook.idNumber=Registers.idNumber and 
+							Registers.idNumber=Users.idNumber and Gradebook.assignmentID=Assignment.assignmentID and Class.semesterID=1");
 
-
-echo "<td>".$assignmentID."</td><td>".$grade."</td></tr>";
-
-}
-
-
-echo "</select>";
-
+	echo "<table class='table table-bordered'><thread class='t-head'><tr><td>Assignment Name</td>";
+	echo "<td>Due Date</td><td>Grade</td><td>Total Score</td><td>Total Weight</td></tr>";
+    while ($row = $result->fetch_assoc()) {
+				$assignmentName = $row[assignmentName];
+				$dueDate = $row[dueDate];
+				$grade = $row[grade];
+				$totalScore = $row[totalScore];
+				$weight = $row[weight];
+				echo "<tr><td>".$assignmentName. "</td><td>".$dueDate."</td><td>".$grade."</td><td>".$totalScore."</td><td>".$weight."</td></tr>";
+	}
+	echo "</table>";
+	
 ?>

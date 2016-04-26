@@ -34,7 +34,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="dash.html">Dashboard</a></li>
+            <li><a href="dash.php">Dashboard</a></li>
           </ul>
         </div>
       </div>
@@ -48,17 +48,22 @@
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="assets/img/gradebook.png" width="225" height="225" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4><a id="view">View Gradebook</a></h4>
+			  <h4><a href="display_classes3.php">View Gradebook</a></h4>
+              <!--<h4><a id="view">View Gradebook</a></h4>-->
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="assets/img/submit.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4><a href="submit_assign.html">Submit Assignments</a></h4>
             </div>
-
-
+            <div>
+           <form id="classbuttons" style="display:none">
+              <form>
+              <?php
+                $button = $_SESSION['classID'] == 'New' || $_SESSION['classID'] == '' ? "Submit" : "Update"; ?>
+              <input id="<?php echo $button;?>" name ="<?php echo $button;?>" value="<?php echo $button;?>" type='button' onclick="window.location.href='grades.php'"/>
 
               <!--<input type="button" value="Class 1" onclick="window.location.href='grades.php'"/>
-              <br>
+              <br>-->
               <br>
               <input type="button" value="Class 2" onclick="window.location.href='grades.php'" />
               <br>
@@ -69,44 +74,10 @@
               <input type="button" value="Class 4" onclick="window.location.href='grades.php'" />
               <br>
               <br>
-              <input type="button" value="Class 5" onclick="window.location.href='grades.php'" />--> 
-    <div>
-    <form id="classbuttons" style="display:none">
-    <form>
-      <?php
-
-        $conn = new mysqli('localhost', 'root', 'SoftEng476', 'cs476') or die ('Cannot connect to db');
-                
-        echo "<button value=".$row[classID].">".$row[courseName]."</button>";
-        $result = $conn->query("SELECT Course.courseName, Class.classID from Course, Class, Registers where Course.courseID=Class.courseID and Class.classID=Registers.classID and Registers.idNumber=".$_SESSION['idNumber']";");
-        echo "onclick="window.location.href='grades.php'" />";       
-               
-        echo "<br>";
-        echo "<br>";
-        echo "<button value=".$row[classID].">".$row[courseName]."</button>";
-
-        echo "onclick="window.location.href='grades.php'" />";
-        echo "<br>";
-        echo "<br>";
-        echo "<button value=".$row[classID].">".$row[courseName]."</button>";
-
-        echo "onclick="window.location.href='grades.php'" />";
-        echo "<br>";
-        echo "<br>";
-        echo "<button value=".$row[classID].">".$row[courseName]."</button>";
-
-        echo "onclick="window.location.href='grades.php'" />";
-        echo "<br>";
-        echo "<br>";
-        echo "<button value=".$row[classID].">".$row[courseName]."</button>";
-
-        echo "onclick="window.location.href='grades.php'" />";
-
-        ?>
-        </form>
-        </form>
-        </div>
-
+              <input type="button" value="Class 5" onclick="window.location.href='grades.php'" />
+              </form>
+            </form> 
+            </div>   
             <div>
             <script type="text/javascript">
               $(function(){
@@ -134,11 +105,6 @@
                 });
               });  
             </script>
-            </div>
-          </div>
-          </div>
-          </div>
-          </div>
     
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -147,4 +113,3 @@
     <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
   </body>
 </html>
-
