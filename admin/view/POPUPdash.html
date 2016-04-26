@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gradebook Service Dashboard</title>
+    <meta name="description" content="Dashboard for Gradebook">
+    <meta name="author" content="Adam Brauns">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href= "dist/css/dashboard.css" rel="stylesheet">
+
+    <link href="dist/css/elements.css" rel="stylesheet">
+
+    <script src="dist/js/my_js.js"></script>
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">Gradebook Service</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="dash.html">Dashboard</a></li>
+          </ul>
+          <!--<form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>-->
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12 main">
+          <h1 class="page-header">Dashboard</h1>
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="assets/img/students.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4><a id="addRemStu">Add/Remove Users</a></h4>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="assets/img/classes.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4><a id="addRemClass">Add/Remove Classes</a></h4>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="assets/img/password.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4><a id="changepass">Change Password</a></h4>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="assets/img/enroll.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4><a id="enroll">Manage Enrollment</a></h4>
+            </div>
+          </div>
+          <h1 class="page-header" id="headsub"></h1>
+
+<div id="addUser">
+<div id="popupContact">
+<form action="#" id="form" method="post" name="form">
+<img height="40px" device-width = "40px" id="close" src="assets/img/close.png" onclick ="AddUserdiv_hide()">
+<h4>Add User</h4>
+<hr>
+<select>
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+              <option value="administrator">Administrator</option>
+</select>
+<!-- <input id="idnumber" name="idnumber" placeholder="ID Number" type="text"> -->
+<input id="email" name="emailaddress" placeholder="Email" type="text">
+<input id="username" name="username" placeholder="Username" type="text">
+<input id="password" name="password" placeholder="Password" type="text">
+<input id="fn" name="firstname" placeholder="First Name" type="text">
+<input id="ln" name="lastname" placeholder="Last Name" type="text">
+<input id="address" name="address" placeholder="Address" type="text">
+<input id="address2" name="address2" placeholder="Address 2" type="text">
+<input id="state" name="state" placeholder="State" type="text">
+<input id="zip" name="zip" placeholder="Zip Code" type="text">
+<input id="phone" name="phonenumber" placeholder="Phone Number" type="text" >
+<a href="javascript:%20check_empty()" name=addbutton id="submit">Add User</a>
+</form>
+</div>
+</div>
+<button id="Addpopup" onclick="AddUserdiv_show()">Add User</button>
+
+<div id="removeUser">
+<div id="popupContact">
+<form action="#" id="form" method="post" name="form">
+<img height="40px" device-width = "40px" id="close" src="assets/img/close.png" onclick ="RemoveUserdiv_hide()">
+<h4>Remove User</h4>
+<hr>
+<input id="username" name="removeuserid" placeholder="Username" type="text">
+<a href="javascript:%20check_empty()" name ="removeUserButton" id="submit">Remove User</a>
+</form>
+</div>
+</div>
+<button id="Removepopup" onclick="RemoveUserdiv_show()">Remove User</button>
+  
+
+<div id="addClass">
+<div id="popupContact">
+<form action="#" id="form" method="post" name="form">
+<img height="40px" device-width = "40px" id="close" src="assets/img/close.png" onclick ="AddClassdiv_hide()">
+<h4>Add Class</h4>
+<hr>
+<input id="courseName" name="coursename" placeholder="Course Name" type="text">
+<input id="courseDescription" name="coursedesc" placeholder="Course Description" type="text">
+<a href="javascript:%20check_empty()" name = "assClassButton"id="submit">Add Class</a>
+</form>
+</div>
+</div>
+<button id="AddClasspopup" onclick="AddClassdiv_show()">Add Class</button>
+
+
+<div id="removeClass">
+<div id="popupContact">
+<form action="#" id="form" method="post" name="form">
+<img height="40px" device-width = "40px" id="close" src="assets/img/close.png" onclick ="RemoveClassdiv_hide()">
+<h4>Remove Class</h4>
+<hr>
+<input id="courseName" name="removeclassid" placeholder="Course Name" type="text">
+<a href="javascript:%20check_empty()" name="removeClassButton" id="submit">Remove Class</a>
+</form>
+</div>
+</div>
+<button id="Removepopup" onclick="RemoveClassdiv_show()">Remove Class</button> 
+
+<div id="changePass">
+<div id="popupContact">
+<form action="#" id="form" method="post" name="form">
+<img height="40px" device-width = "40px" id="close" src="assets/img/close.png" onclick ="changePassdiv_hide()">
+<h4>Change Password</h4>
+<hr>
+<input id="userID" name="changeuserid" placeholder="User ID" type="text">
+<input id="newPass" name="newpass" placeholder="New Password" type="text">
+<input id="confirmPass" name="newpass2" placeholder="Confirm Password" type="text">
+<a href="javascript:%20check_empty()" id="submit">Add Class</a>
+</form>
+</div>
+</div>
+<button id="changePasspopup" onclick="changePassdiv_show()">Change Password</button>  
+
+<div id="manage">
+<div id="popupContact">
+<form action="#" id="form" method="post" name="form">
+<img height="40px" device-width = "40px" id="close" src="assets/img/close.png" onclick ="managediv_hide()">
+<h4>Add User</h4>
+<hr>
+<select>
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+</select>
+<input id="userID" name="enrollmentcourse" placeholder="User ID" type="text">
+<input id="course" name="addEnrollment" placeholder="Course" type="text">
+<a href="javascript:%20check_empty()" name="addEnrollment" id="submit">Add</a>
+<a href="javascript:%20check_empty()" name-"removeEnrollment"  id="submit">Remove</a>
+</form>
+</div>
+</div>
+<button id="managepopup" onclick="managediv_show()">Manage Enrollment</button>         
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
+  </body>
+</html>
