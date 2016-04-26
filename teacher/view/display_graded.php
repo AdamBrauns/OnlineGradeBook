@@ -45,32 +45,49 @@
     <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
   </body>
 </html>
+
 <?php
 
-$conn = new mysqli('localhost', 'root', 'SoftEng476', 'cs476') 
-or die ('Cannot connect to db');
+			
+			$idNumber=$_POST['idNumber'];
+			$assignID=$_POST['assignmentID'];
+			$grade=$_POST['grade'];
+			$classID=$_POST['classID'];
+			echo "id: ".$idNumber." assignmentID:   ".$assignID." classID:  ".$classID." Grade:  ".$grade." ";
+			
+			//connect  to the database
+			$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
+			//-select  the database to use
+			$mydb=mysql_select_db("cs476");
+			//-query  the database table
+			$sql="SELECT  Gradebook.classID FROM Gradebook WHERE Gradebook.classID=".$classID." AND Gradebook.assignmentID=".$assignID." AND Gradebook.idNumber=".$idNumber."";
+			echo $sql;
+			//-run  the query against the mysql query function
+			$result=mysql_query($sql);
+			echo "Boop";
+			//-create  while loop and loop through result set
+			$rowCt=mysql_num_rows($result);
+			if($rowCt>0){
+				$sql2 = "UPDATE Gradebook 
+				SET Gradebook.grade=".$grade."
+				WHERE Gradebook.classID=".$classID." AND Gradebook.assignmentID=".$assignID." AND Gradebook.idNumber=".$idNumber."";
+				echo "Shabam";
+				if (mysql_query($sql2) === TRUE) {
+					echo "New record updated successfully";
+				} else {
+					echo "Error: " . $sql . "<br>";
+				}
+				echo "This is Sad.";
+			}else if($rowCt==0){
+				$sql3 = "INSERT INTO Gradebook (classID, assignmentID, idNumber, grade)
+				VALUES (".$classID.", ".$assignID.", ".$idNumber.", ".$grade.")";
 
-    $result = $conn->query("select assignmentID, assignmentName from Assignment");
+				if (mysql_query($sql3) === TRUE) {
+					echo "New record created successfully";
+				} else {
+					echo "Error: " . $sql . "<br>";
+				}
 
-    echo "<form method='post' action='display_graded.php'><select name='assignmentID'>";
+			}
 
-    while ($row = $result->fetch_assoc()) {
-
-                  unset($assignmentID, $assignmentName);
-                  $assignmentID = $row['assignmentID'];
-                  $assignmentName = $row['assignmentName']; 
-                  echo '<option value="'.$assignmentID.'">'.$assignmentName.'</option>';
-
-	}
-
-    echo "</select>";
-	echo "<br> Enter student's ID number. <br>";
-	echo "<input type='text' name='idNumber'>";
-	echo "<br> Enter assignment grade. <br>";
-	echo "<input type='text' name='grade'>";
-	echo "<input type='hidden' name='classID' value='".$_GET['classID']."'>";
-	echo "<br> <button type='submit' name='submit'> Submit </button></form>";
-	
-	
-	
-?>
+	?>
