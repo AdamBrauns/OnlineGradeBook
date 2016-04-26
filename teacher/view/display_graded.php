@@ -32,7 +32,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="dash.html">Dashboard</a></li>
+            <li><a href="dash.php">Dashboard</a></li>
           </ul>
         </div>
       </div>

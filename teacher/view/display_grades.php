@@ -1,5 +1,3 @@
-
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -39,15 +37,7 @@
         </div>
       </div>
     </nav>
-
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-12 main">
-          <h1 class="page-header">Class List</h1>
-        </div>
-      </div>
-    </div>
-
+	
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -55,36 +45,34 @@
     <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
   </body>
 </html>
-
-
-
 <?php
 
 $conn = new mysqli('localhost', 'root', 'SoftEng476', 'cs476') 
 or die ('Cannot connect to db');
 
+    $result2 = $conn->query("select Course.courseName, Class.sectionID from Class, Course
+							where Course.courseID=Class.courseID and Class.classID=".$_GET['classID']." and Class.semesterID=1");
+	$row2 = $result2->fetch_assoc();
+	echo "<h2> Grades for ".$row2['courseName']." section ".$row2['sectionID']."</h2>";
 
-    $result = $conn->query("select Class.classID, Course.courseName, Class.sectionID from Class, Course
-							where Course.courseID=Class.courseID and Class.semesterID=1");
+    $result = $conn->query("select Users.idNumber, Users.firstName, Users.lastName, Assignment.assignmentName, Assignment.dueDate, Gradebook.grade, Assignment.totalScore
+							from Gradebook, Users, Class, Assignment, Registers
+							where Registers.classID=".$_GET['classID']." and Gradebook.classID=Registers.classID and Gradebook.classID=Class.classID
+							and Gradebook.idNumber=Registers.idNumber and 
+							Registers.idNumber=Users.idNumber and Gradebook.assignmentID=Assignment.assignmentID and Class.semesterID=1;");
 
-	//Get a table of all the classes offered. Link forward to be able to display grades or grade assignments for a selected class.
-	echo "<table class='table table-bordered'><thread class='t-head'><tr><td></td><td></td><td>Class Name</td><td>Class Section</td></tr>";
+	echo "<table class='table table-bordered'><thread class='t-head'><tr><td>Student ID</td><td>First Name</td><td>Last Name</td><td>Assignment Name</td>";
+	echo "<td>Due Date</td><td>Grade</td><td>Total Score</td></tr>";
     while ($row = $result->fetch_assoc()) {
-				$classID = $row[classID];
-				$classN = $row[courseName];
-				$sectionID = $row[sectionID];
-				echo "<tr><td><form method='post' action='./display_grades.php?classID=".$classID."'>";
-				echo "<button type='submit'>View Class Grades</button></td></form>";
-				echo "<td><form method='post' action='./display_gradebook.php?classID=".$classID."'>";
-				echo "<button type='submit'>Grade Assignments</button></td></form>";
-				echo "<td>".$classN. "</td><td>".$sectionID."</td></tr>";
+				$idNumber = $row[idNumber];
+				$firstName = $row[firstName];
+				$lastName = $row[lastName];
+				$assignmentName = $row[assignmentName];
+				$dueDate = $row[dueDate];
+				$grade = $row[grade];
+				$totalScore = $row[totalScore];
+				echo "<tr><td>".$idNumber."</td><td>".$firstName."</td><td>".$lastName."</td><td>".$assignmentName. "</td><td>".$dueDate."</td><td>".$grade."</td><td>".$totalScore."</td></tr>";
 	}
-
+	echo "</table>";
 	
 ?>
-
-
-
-
-
-
