@@ -74,33 +74,33 @@
     <form id="classbuttons" style="display:none">
     <form>
       <?php
-        echo "<html>";
+
         $conn = new mysqli('localhost', 'root', 'SoftEng476', 'cs476') or die ('Cannot connect to db');
                 
         echo "<button value=".$row[classID].">".$row[courseName]."</button>";
         $result = $conn->query("SELECT Course.courseName, Class.classID from Course, Class, Registers where Course.courseID=Class.courseID and Class.classID=Registers.classID and Registers.idNumber=".$_SESSION['idNumber']";");
-        onclick="window.location.href='grades.php'" />        
+        echo "onclick="window.location.href='grades.php'" />";       
                
-        <br>
-        <br>
+        echo "<br>";
+        echo "<br>";
         echo "<button value=".$row[classID].">".$row[courseName]."</button>";
 
-        onclick="window.location.href='grades.php'" />
-        <br>
-        <br>
+        echo "onclick="window.location.href='grades.php'" />";
+        echo "<br>";
+        echo "<br>";
         echo "<button value=".$row[classID].">".$row[courseName]."</button>";
 
-        onclick="window.location.href='grades.php'" />
-        <br>
-        <br>
+        echo "onclick="window.location.href='grades.php'" />";
+        echo "<br>";
+        echo "<br>";
         echo "<button value=".$row[classID].">".$row[courseName]."</button>";
 
-        onclick="window.location.href='grades.php'" />
-        <br>
-        <br>
+        echo "onclick="window.location.href='grades.php'" />";
+        echo "<br>";
+        echo "<br>";
         echo "<button value=".$row[classID].">".$row[courseName]."</button>";
 
-        onclick="window.location.href='grades.php'" />
+        echo "onclick="window.location.href='grades.php'" />";
 
         ?>
         </form>
