@@ -54,57 +54,8 @@
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="assets/img/submit.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
               <h4><a href="submit_assign.html">Submit Assignments</a></h4>
-            </div>
-            <div>
-           <form id="classbuttons" style="display:none">
-              <form>
-              <?php
-                $button = $_SESSION['classID'] == 'New' || $_SESSION['classID'] == '' ? "Submit" : "Update"; ?>
-              <input id="<?php echo $button;?>" name ="<?php echo $button;?>" value="<?php echo $button;?>" type='button' onclick="window.location.href='grades.php'"/>
-
-              <!--<input type="button" value="Class 1" onclick="window.location.href='grades.php'"/>
-              <br>-->
-              <br>
-              <input type="button" value="Class 2" onclick="window.location.href='grades.php'" />
-              <br>
-              <br>
-              <input type="button" value="Class 3" onclick="window.location.href='grades.php'" />
-              <br>
-              <br>
-              <input type="button" value="Class 4" onclick="window.location.href='grades.php'" />
-              <br>
-              <br>
-              <input type="button" value="Class 5" onclick="window.location.href='grades.php'" />
-              </form>
-            </form> 
-            </div>   
-            <div>
-            <script type="text/javascript">
-              $(function(){
-                $('#view').click(function(){
-                  $('#classbuttons').css("display", "inline");
-                  $('#uploadButton').css("display", "none");
-                });
-                $('#classone').click(function(){
-                  $('#grades').css("display", "inline");
-                });
-                $('#classtwo').click(function(){
-                  $('#grades').css("display", "inline");
-                });
-                $('#classthree').click(function(){
-                  $('#grades').css("display", "inline");
-                });
-                $('#classfour').click(function(){
-                  $('#grades').css("display", "inline");
-                });
-                $('#classfive').click(function(){
-                  $('#grades').css("display", "inline");
-                });
-                $('#submit').click(function(){
-                  $('#submit_assign').css("display", "inline");
-                });
-              });  
-            </script>
+            </div> 
+            
     
     <!-- Bootstrap core JavaScript
     ================================================== -->
