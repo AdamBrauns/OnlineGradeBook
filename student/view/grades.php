@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -57,7 +60,7 @@ or die ('Cannot connect to db');
 
     $result = $conn->query("select Assignment.assignmentName, Assignment.dueDate, Gradebook.grade, Assignment.totalScore, Assignment.weight
 							from Gradebook, Users, Class, Assignment, Registers
-							where Registers.classID=".$_GET['classID']." and Registers.idNumber=100000 and Gradebook.classID=Registers.classID
+							where Registers.classID=".$_GET['classID']." and Registers.idNumber=".$_SESSION['idNumber']." and Gradebook.classID=Registers.classID
 							and Gradebook.classID=Class.classID and Gradebook.idNumber=Registers.idNumber and 
 							Registers.idNumber=Users.idNumber and Gradebook.assignmentID=Assignment.assignmentID and Class.semesterID=1");
 

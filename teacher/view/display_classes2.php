@@ -1,5 +1,8 @@
 
 <!DOCTYPE html>
+<?php
+session_start();
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -34,7 +37,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="dash.html">Dashboard</a></li>
+            <li><a href="dash.php">Dashboard</a></li>
           </ul>
         </div>
       </div>
@@ -63,26 +66,21 @@
 $conn = new mysqli('localhost', 'root', 'SoftEng476', 'cs476') 
 or die ('Cannot connect to db');
 
-    $result = $conn->query("select Class.classID, Course.courseName, Class.sectionID from Class, Course
-							where Course.courseID=Class.courseID and Class.semesterID=1");
+    $result = $conn->query("select Class.classID, Course.courseName, Class.sectionID from Class, Course, Teaches
+							where Course.courseID=Class.courseID and Class.semesterID=1 and Class.classID=Teaches.classID 
+							and Teaches.idNumber=".$_SESSION['idNumber']."");
 
-    //echo "<select name='courseID'>";
 	echo "<table class='table table-bordered'><thread class='t-head'><tr><td></td><td>Class Name</td><td>Class Section</td></tr>";
     while ($row = $result->fetch_assoc()) {
 				$classID = $row[classID];
 				$classN = $row[courseName];
 				$sectionID = $row[sectionID];
 				echo "<tr><td><form method='post' action='./add_assignment.php?classID=".$classID."'><button type='submit'>Select</button><input type='hidden' name='action' value='select_gradebook'></td></form>";
-				//echo "<input type='hidden' name='cid' value='".$classID."'</form></td>";
 				echo "<td>".$classN. "</td><td>".$sectionID."</td></tr>";
-                  //unset($courseID, $courseName);
-                  //$courseID = $row['courseID'];
-                  //$courseName = $row['courseName']; 
-                  //echo '<option value="'.$courseID.'">'.$courseName.'</option>';
+
 
 }
 
-    echo "</select>";
 	
 ?>
 

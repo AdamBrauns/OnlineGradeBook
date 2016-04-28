@@ -1,5 +1,7 @@
-
 <!DOCTYPE html>
+<?php
+session_start();
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -64,8 +66,9 @@ $conn = new mysqli('localhost', 'root', 'SoftEng476', 'cs476')
 or die ('Cannot connect to db');
 
 
-    $result = $conn->query("select Class.classID, Course.courseName, Class.sectionID from Class, Course
-							where Course.courseID=Class.courseID and Class.semesterID=1");
+    $result = $conn->query("select Class.classID, Course.courseName, Class.sectionID from Class, Course, Teaches
+							where Course.courseID=Class.courseID and Class.semesterID=1 and Class.classID=Teaches.classID 
+							and Teaches.idNumber=".$_SESSION['idNumber']."");
 
 	//Get a table of all the classes offered. Link forward to be able to display grades or grade assignments for a selected class.
 	echo "<table class='table table-bordered'><thread class='t-head'><tr><td></td><td></td><td>Class Name</td><td>Class Section</td></tr>";

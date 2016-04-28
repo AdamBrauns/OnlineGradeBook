@@ -1,5 +1,7 @@
-
 <!DOCTYPE html>
+<?php
+session_start();
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -67,7 +69,7 @@ or die ('Cannot connect to db');
 	//						where Registers.idNumber=".$_SESSION['idNumber']." and Registers.classID=Class.classID and Course.courseID=Class.courseID and Class.semesterID=1");
 
  $result = $conn->query("select Class.classID, Course.courseName, Class.sectionID from Class, Course, Registers
-							where Registers.idNumber=100000 and Registers.classID=Class.classID and Course.courseID=Class.courseID and Class.semesterID=1");
+							where Registers.idNumber=".$_SESSION['idNumber']." and Registers.classID=Class.classID and Course.courseID=Class.courseID and Class.semesterID=1");
 
 	//create a table with class name
 	echo "<table class='table table-bordered'><thread class='t-head'><tr><td></td><td>Class Name</td><td>Class Section</td></tr>";

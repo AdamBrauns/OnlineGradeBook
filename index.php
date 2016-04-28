@@ -1,4 +1,9 @@
 <?php
+// Destroy session variables
+session_unset();
+setcookie(session_start(),'',time()-3600,'/');
+session_destroy();
+	
 session_start();
 include('./model/fun.php');
 
@@ -15,7 +20,6 @@ if (isset($_REQUEST['action']))
 	//echo($_POST['username']);
 
 	$count = validateUser();
-
 	if($count == 1){
 	$userInfo = getUserInfo();
 	
@@ -27,7 +31,7 @@ if (isset($_REQUEST['action']))
 		//echo $_SESSION['userYype'];
 		$_SESSION['idNumber']=$userInfo['idNumber'];
 		//echo $_SESSION['idNumber'];
-		header('Location: ./'.$_SESSION['userType'].'/view/dash.html');
+		header('Location: ./'.$_SESSION['userType'].'/view/dash.php');
 	/* The default view will be displayed by default*/
 	}else{
 	//echo("Invalid User");
@@ -43,25 +47,16 @@ if (isset($_REQUEST['action']))
 }
 }
 
-if($action=='logout'){
+/*if($action=='logout'){
 	// Destroy session variables and redirect to login page
 	session_unset();
 	setcookie(session_start(),'',time()-3600,'/');
 	session_destroy();
 	header("Location: ./login.html");
-	}
+	}/*
 /* Only valid users should be able to perform any of the following tasks!
   It is possible for invalid user to reach this far
   Check if it is a valid user. If not, redirect to the login page.*/
 
-if(!isset($_SESSION['valid_user'])){
-	header("Location: ./".$_SESSION['user_type']."/view/dash.html");}
-//Valid users should be able to performt he following tasks.
 
-switch($action) {
-
-default:
-	include("./".$_SESSION['user_type']."/view/dash.html");
-	break;
-}
 ?>
