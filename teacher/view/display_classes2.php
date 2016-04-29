@@ -47,6 +47,9 @@ session_start();
       <div class="row">
         <div class="col-sm-12 main">
           <h1 class="page-header">Class List</h1>
+          <form action="https://www.filestack.com/" target="_blank">
+            <input type="submit" value="View Submitted Assignments">
+          </form>  
         </div>
       </div>
     </div>
