@@ -62,37 +62,45 @@
 			$mydb=mysql_select_db("cs476");
 			//-query  the database table
 			$sql="INSERT INTO Assignment(assignmentName, description, dueDate, totalScore, weight)
-				VALUES (".$assignmentName.", ".$description.", ".$dueDate.", ".$totalScore.", ".$weight.")";
+				VALUES ('".$assignmentName."', '".$description."', '".$dueDate."', '".$totalScore."', ".$weight.")";
 			echo $sql."</br>";
 			//-run  the query against the mysql query function
 			if (mysql_query($sql) === TRUE) {
 					echo "New assignment added successfully";
 				} else {
-					echo "Error: " . $sql . "<br>";
+					echo "Error: " . mysql_error() . "<br>";
 				}
-			echo "Query 1 Successful.";
+			
+			
 			
 			echo "</br>";
-			$sqlAssign = "select Assignment.assignmentID FROM Assignment WHERE Assignment.assignmentName=".$assignmentName." and Assignment.description=".$description."
-						 and Assignment.dueDate=".$dueDate." and Assignment.totalScore=".$totalScore." and
+			$sqlAssign = "select Assignment.assignmentID FROM Assignment WHERE Assignment.assignmentName='".$assignmentName."' and Assignment.description='".$description."'
+						 and Assignment.dueDate='".$dueDate."' and Assignment.totalScore='".$totalScore."' and
 						 Assignment.weight=".$weight."";
-			echo $sqlAssign."</br>";
-			//$getAssign = mysql_query($sqlAssign);
-			//$gA = mysql_fetch_assoc($getAssign);
-			//echo $gA['assignmentID']."</br>";
+
+			$getAssign = mysql_query($sqlAssign) or die(mysql_error());
+			//echo $getAssign['assignmentID']."<br>";
+			$gA = mysql_fetch_assoc($getAssign);
+			echo $gA."</br>";
 			
 			
 			//get a list of the students registered for the selected class.
 			$sql2="Select Registers.idNumber From Registers Where Registers.classID =".$classID."";
 			//-run  the query against the mysql query function
 			$student_list=mysql_query($sql2);
-			echo "Query 2 successful.";
-			if(is_resource($student_list) and mysql_num_rows($student_list)>0){
+			echo "Query 2 successful.<br>";
+			if(/*is_resource($student_list) and*/ mysql_num_rows($student_list)>0){
 				while($row = mysql_fetch_assoc($student_list))
 				{
-					//$sql3 = "INSERT INTO Gradebook (classID, assignmentID, idNumber, grade)
-					//VALUES (".$classID.", ".$assignID.", ".$row['idNumber'].", " . 0);
-					//echo $sql3;
+					$sql3 = "INSERT INTO Gradebook (classID, assignmentID, idNumber, grade)
+					VALUES (".$classID.", ".$gA['assignmentID'].", ".$row['idNumber'].", 0 )";
+					echo $sql3;
+								if (mysql_query($sql3) === TRUE) {
+					echo "New assignment added successfully";
+					} else {
+					echo "Error: " . mysql_error() . "<br>";
+					}
+					
 				}
 			}
 
