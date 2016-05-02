@@ -46,7 +46,7 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-12 main">
+        < class="col-sm-12 main">
           <h1 class="page-header">Dashboard</h1>
 
           <div class="row placeholders">
@@ -77,42 +77,50 @@
             </form>  
           </div>  
           <div>
-            <form id="info" style="display:none">
-            <br>
-            Select User Type:<br>
-            <select>
-              <option value="student">Student</option>
-              <option value="teacher">Teacher</option>
-              <option value="administrator">Administrator</option>
-            </select>
-            <br> 
-            First Name:<br>
-            <input type="text" name="firstname"><br>
-            Last Name:<br>
-            <input type="text" name="lastname"><br>
-            Address:<br>
-            <input type="text" name="address"><br>
-            Address 2:<br>
-            <input type="text" name="address2"><br>
-            State:<br>
-            <input type="text" name="state"><br>
-            Zipcode:<br>
-            <input type="text" name="zip"><br>
-            Phone Number:<br>
-            <input type="text" name="phonenumber"><br>
-            Password:<br>
-            <input type="text" name="password"><br><br>
-            <button type="button" id="addbutton">Add User</button>
+            <form action="addUser.php" method="post" id="info" style="display:none">
+                  <br>
+                  Select User Type:<br>
+                  <select name = "userType">
+                      <option value="student">Student</option>
+                      <option value="teacher">Teacher</option>
+                      <option value="administrator">Administrator</option>
+                  </select>
+                  <br>
+                  ID Number:<br>
+                  <input type="text" name="idnumber"><br>
+                  Email Address:<br>
+                  <input type="text" name="emailaddress"><br>
+                  Username:<br>
+                  <input type="text" name="username"><br>
+                  Password:<br>
+                  <input type="text" name="password"><br>
+                  First Name:<br>
+                  <input type="text" name="firstname"><br>
+                  Last Name:<br>
+                  <input type="text" name="lastname"><br>
+                  Address:<br>
+                  <input type="text" name="address"><br>
+                  Address 2:<br>
+                  <input type="text" name="address2"><br>
+                  State:<br>
+                  <input type="text" name="state"><br>
+                  Zipcode:<br>
+                  <input type="text" name="zip"><br>
+                  Phone Number:<br>
+                  <input type="text" name="phonenumber"><br><br>
+                  <button type="submit" id="addbutton" name="addbutton">Submit</button>
             </form>
           </div>
+
           <div>
-            <form id="removeSearch" style="display:none">
+            <form action="removeUser.php" method="post" id="removeSearch" style="display:none">
             <br>
-            Username:<br>
-            <input type="text" name="lastname">&nbsp;&nbsp;
-            <button type="button" id="searchbutton">Remove User</button>
+            User ID:<br>
+            <input type="text" name="idnumber">&nbsp;&nbsp;
+            <button type="submit" id="removeuserButton">Remove User</button>
             </form>
           </div>
+
           <div>
             <form id="classbuttons" style="display:none">
               <h2 style="text-decoration: underline;">Add/Remove Classes</h2><br>
@@ -120,24 +128,27 @@
               <button type="button" id="remc">Remove Class</button>
             </form>  
           </div>
+
           <div>
-            <form id="addclass" style="display:none">
+            <form action="addClass.php" method="post" id="addclass" style="display:none">
               <br>Course Name:<br>
               <input type="text" name="coursename"><br>
               Course Description:<br>
               <input type="text" name="coursedesc"><br><br>
-              <button type="button" id="searchbutton">Add Class</button>
+              <button type="submit" id="searchbutton">Add Class</button>
             </form>  
           </div>
+
           <div>
-            <form id="remclass" style="display:none">
-              <br>Course Name:<br>
-              <input type="text" name="coursename"><br><br>
-              <button type="button" id="searchbutton">Remove Course</button>
+            <form action="removeClass.php" method="post" id="remclass" style="display:none">
+              <br>Course ID:<br>
+              <input type="text" name="courseid"><br><br>
+              <button type="submit" id="removeClassButton">Remove Course</button>
             </form>  
-          </div>  
+          </div>
+
           <div>
-            <form id="passChange" style="display:none">
+            <form action="changePassword.php" method="post" id="passChange" style="display:none">
             <h2 style="text-decoration: underline;">Change Password</h2><br>
             Username:<br>
             <input type="text" name="username"><br>
@@ -145,25 +156,26 @@
             <input type="text" name="newpass"><br>
             Confirm Password:<br>
             <input type="text" name="newpass2"><br><br>
-            <button type="button" id="searchbutton">Change Password</button>
+            <button type="submit" id="changePassButt">Change Password</button>
             </form>
           </div>
+
           <div>
-            <form id="enrollform" style="display:none">
+            <form id="enrollform" method="post" style="display:none">
             <h2 style="text-decoration: underline;">Manage Enrollment</h2>
             <br>
             Select User Type:<br>
-            <select>
+            <select name = "usertype">
               <option value="student">Student</option>
               <option value="teacher">Teacher</option>
             </select>
             <br> 
             User ID:<br>
-            <input type="text" name="firstname"><br>
-            Course:<br>
-            <input type="text" name="course"><br><br>
-            <button type="button">Add</button>
-            <button type="button">Remove</button>
+            <input type="text" name="idnumber"><br>
+            Class ID:<br>
+            <input type="text" name="classid"><br><br>
+            <button type="submit" formaction="addEnrollment.php">Add</button>
+            <button type="submit" formaction="removeEnrollment.php">Remove</button>
             </form>
           </div>    
           </div>
@@ -235,9 +247,14 @@
                 $('#addclass').css("display", "none");
                 $('#enrollform').css("display", "inline");
               });
+
+
             });
 
           </script>
+
+
+
         </div>
       </div>
     </div>
