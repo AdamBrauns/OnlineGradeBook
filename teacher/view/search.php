@@ -34,7 +34,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="dash.html">Dashboard</a></li>
+            <li><a href="dash.php">Dashboard</a></li>
+			<li><a href="../../login.html">Log Out</a></li>
           </ul>
         </div>
       </div>
@@ -49,7 +50,7 @@
     </div>
 <div class="container">
   <div class="jumbotron">
-    <h1>Welcome to the Directory Search</h1> 
+    <span><h1>Welcome to the Directory Search</h1></span>
     <div class="col-md-6 col-centered">
     <p>Type in a last name to search.</p>
 	    <form  method="post" action="search.php?go"  id="searchform"> 
