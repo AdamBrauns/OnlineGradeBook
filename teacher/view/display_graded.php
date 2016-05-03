@@ -43,8 +43,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
-  </body>
-</html>
+
 
 <?php
 
@@ -53,7 +52,6 @@
 			$assignID=$_POST['assignmentID'];
 			$grade=$_POST['grade'];
 			$classID=$_POST['classID'];
-			echo "id: ".$idNumber." assignmentID:   ".$assignID." classID:  ".$classID." Grade:  ".$grade." ";
 			
 			//connect  to the database
 			$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
@@ -61,33 +59,39 @@
 			$mydb=mysql_select_db("cs476");
 			//-query  the database table
 			$sql="SELECT  Gradebook.classID FROM Gradebook WHERE Gradebook.classID=".$classID." AND Gradebook.assignmentID=".$assignID." AND Gradebook.idNumber=".$idNumber."";
-			echo $sql;
+
 			//-run  the query against the mysql query function
 			$result=mysql_query($sql);
-			echo "Boop";
+
 			//-create  while loop and loop through result set
 			$rowCt=mysql_num_rows($result);
 			if($rowCt>0){
 				$sql2 = "UPDATE Gradebook 
 				SET Gradebook.grade=".$grade."
 				WHERE Gradebook.classID=".$classID." AND Gradebook.assignmentID=".$assignID." AND Gradebook.idNumber=".$idNumber."";
-				echo "Shabam";
+
 				if (mysql_query($sql2) === TRUE) {
-					echo "New record updated successfully";
+					//echo "New record updated successfully";
 				} else {
-					echo "Error: " . $sql . "<br>";
+					//echo "Error: " . $sql . "<br>";
 				}
-				echo "This is Sad.";
 			}else if($rowCt==0){
 				$sql3 = "INSERT INTO Gradebook (classID, assignmentID, idNumber, grade)
 				VALUES (".$classID.", ".$assignID.", ".$idNumber.", ".$grade.")";
 
 				if (mysql_query($sql3) === TRUE) {
-					echo "New record created successfully";
+					//echo "New record created successfully";
 				} else {
-					echo "Error: " . $sql . "<br>";
+					//echo "Error: " . $sql . "<br>";
 				}
 
 			}
 
 	?>
+	
+		<script language="javascript">
+		alert("Assignment successfully graded!");
+		location= "./dash.php";
+		</script>
+	</body>
+</html>

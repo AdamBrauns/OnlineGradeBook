@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -43,8 +46,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
-  </body>
-</html>
+
 
 <?php
 
@@ -54,8 +56,7 @@
 			$totalScore=$_POST['totalScore'];
 			$weight=$_POST['weight'];
 			$classID=$_POST['classID'];
-			echo "assignmentName: ".$assignmentName." Description: ".$description." dueDate: ".$dueDate." totalScore: ".$totalScore." weight: ".$weight." classID:  ".$classID." ";
-			echo "</br>";
+	
 			//connect  to the database
 			$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
 			//-select  the database to use
@@ -63,17 +64,14 @@
 			//-query  the database table
 			$sql="INSERT INTO Assignment(assignmentName, description, dueDate, totalScore, weight)
 				VALUES ('".$assignmentName."', '".$description."', '".$dueDate."', '".$totalScore."', ".$weight.")";
-			echo $sql."</br>";
+			
 			//-run  the query against the mysql query function
 			if (mysql_query($sql) === TRUE) {
-					echo "New assignment added successfully";
+					//echo "New assignment added successfully";
 				} else {
-					echo "Error: " . mysql_error() . "<br>";
+					//echo "Error: " . mysql_error() . "<br>";
 				}
-			
-			
-			
-			echo "</br>";
+	
 			$sqlAssign = "select Assignment.assignmentID FROM Assignment WHERE Assignment.assignmentName='".$assignmentName."' and Assignment.description='".$description."'
 						 and Assignment.dueDate='".$dueDate."' and Assignment.totalScore='".$totalScore."' and
 						 Assignment.weight=".$weight."";
@@ -81,27 +79,33 @@
 			$getAssign = mysql_query($sqlAssign) or die(mysql_error());
 			//echo $getAssign['assignmentID']."<br>";
 			$gA = mysql_fetch_assoc($getAssign);
-			echo $gA."</br>";
 			
 			
 			//get a list of the students registered for the selected class.
 			$sql2="Select Registers.idNumber From Registers Where Registers.classID =".$classID."";
 			//-run  the query against the mysql query function
 			$student_list=mysql_query($sql2);
-			echo "Query 2 successful.<br>";
 			if(/*is_resource($student_list) and*/ mysql_num_rows($student_list)>0){
 				while($row = mysql_fetch_assoc($student_list))
 				{
 					$sql3 = "INSERT INTO Gradebook (classID, assignmentID, idNumber, grade)
 					VALUES (".$classID.", ".$gA['assignmentID'].", ".$row['idNumber'].", 0 )";
-					echo $sql3;
-								if (mysql_query($sql3) === TRUE) {
-					echo "New assignment added successfully";
+					//echo $sql3;
+					if (mysql_query($sql3) === TRUE) {
+						//echo "New assignment added successfully";
 					} else {
-					echo "Error: " . mysql_error() . "<br>";
+						//echo "Error: " . mysql_error() . "<br>";
 					}
 					
 				}
 			}
+			
 
 	?>
+	
+			<script language="javascript">
+			alert("New assignment successfully added!");
+			location= "./dash.php";
+			</script>
+	</body>
+</html>
