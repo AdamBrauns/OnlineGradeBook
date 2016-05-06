@@ -33,6 +33,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="dash.php">Dashboard</a></li>
+			<li><a href="../../login.html">Log Out</a></li>
           </ul>
         </div>
       </div>
@@ -47,32 +48,66 @@
 </html>
 <?php
 
-$conn = new mysqli('localhost', 'root', 'SoftEng476', 'cs476') 
-or die ('Cannot connect to db');
+//$conn = new mysqli('localhost', 'root', 'SoftEng476', 'cs476') 
+//or die ('Cannot connect to db');
 
-    $result2 = $conn->query("select Course.courseName, Class.sectionID from Class, Course
+$db=mysql_connect  ('localhost', 'root',  'SoftEng476') or die ('I cannot connect to the database  because: ' . mysql_error());
+//-select  the database to use
+$mydb=mysql_select_db("cs476");
+
+
+    $result2 = mysql_query("select Course.courseName, Class.sectionID from Class, Course
 							where Course.courseID=Class.courseID and Class.classID=".$_GET['classID']." and Class.semesterID=1");
-	$row2 = $result2->fetch_assoc();
+	$row2 = mysql_fetch_assoc($result2);
 	echo "<h2> Grades for ".$row2['courseName']." section ".$row2['sectionID']."</h2>";
 
-    $result = $conn->query("select Users.idNumber, Users.firstName, Users.lastName, Assignment.assignmentName, Assignment.dueDate, Gradebook.grade, Assignment.totalScore
-							from Gradebook, Users, Class, Assignment, Registers
-							where Registers.classID=".$_GET['classID']." and Gradebook.classID=Registers.classID and Gradebook.classID=Class.classID
-							and Gradebook.idNumber=Registers.idNumber and 
-							Registers.idNumber=Users.idNumber and Gradebook.assignmentID=Assignment.assignmentID and Class.semesterID=1;");
+	//Build the named column for the table.
+	$result1 = mysql_query("select Assignment.assignmentName from Assignment");
+	echo "<table class='table table-bordered'><thread class='t-head'><tr><td>Student ID</td><td>First Name</td><td>Last Name</td>";
+	
+	if(mysql_num_rows($result1)>0){
+		while($row1 = mysql_fetch_assoc($result1)){
+		echo"<td>".$row1['assignmentName']."</td>";
+		}
+	}
+	echo "<td>Final Grade</td></tr>";
+	
+	$sql2="Select Registers.idNumber From Registers Where Registers.classID =".$_GET['classID']."";
+	//-run  the query against the mysql query function
+	$student_list=mysql_query($sql2);
 
-	echo "<table class='table table-bordered'><thread class='t-head'><tr><td>Student ID</td><td>First Name</td><td>Last Name</td><td>Assignment Name</td>";
-	echo "<td>Due Date</td><td>Grade</td><td>Total Score</td></tr>";
-    while ($row = $result->fetch_assoc()) {
-				$idNumber = $row[idNumber];
-				$firstName = $row[firstName];
-				$lastName = $row[lastName];
-				$assignmentName = $row[assignmentName];
-				$dueDate = $row[dueDate];
-				$grade = $row[grade];
-				$totalScore = $row[totalScore];
-				echo "<tr><td>".$idNumber."</td><td>".$firstName."</td><td>".$lastName."</td><td>".$assignmentName. "</td><td>".$dueDate."</td><td>".$grade."</td><td>".$totalScore."</td></tr>";
+	
+	if( mysql_num_rows($student_list)>0){
+		echo "Hello~";
+		while($row = mysql_fetch_assoc($student_list))
+		{
+			//Print the students information
+			$idNumber=$row['idNumber'];
+			$result3 = mysql_query("select Users.idNumber, Users.firstName, Users.lastName, Registers.finalGrade from Users, Registers where Users.idNumber=".$idNumber."
+									and Registers.idNumber=Users.idNumber and Registers.classID=".$_GET['classID']."");
+			$row3=mysql_fetch_assoc($result3);
+			$idNumber = $row3['idNumber'];
+			$firstName = $row3['firstName'];
+			$lastName = $row3['lastName'];
+			$finalGrade = $row3['finalGrade'];
+			echo "<tr><td>".$idNumber."</td><td>".$firstName."</td><td>".$lastName."</td>";
+			
+			//Print their grades for each assignment
+			$result4= mysql_query("select Gradebook.grade
+					from Gradebook, Users, Class, Assignment, Registers
+					where Registers.classID=".$_GET['classID']." and Gradebook.classID=Registers.classID and Gradebook.classID=Class.classID
+					and Gradebook.idNumber=Registers.idNumber and Registers.idNumber=Users.idNumber and Users.idNumber=".$idNumber."
+					and Gradebook.assignmentID=Assignment.assignmentID and Class.semesterID=1");
+			
+				if(mysql_num_rows($result4)>0){
+				while($row4 = mysql_fetch_assoc($result4)){
+					echo"<td>".$row4['grade']."</td>";
+					}
+				}
+				echo "<td>".$finalGrade."</td>";
+				echo "</tr>";
+		}
 	}
 	echo "</table>";
-	
+
 ?>
