@@ -70,7 +70,7 @@ $mydb=mysql_select_db("cs476");
 		echo"<td>".$row1['assignmentName']."</td>";
 		}
 	}
-	echo "<td>Final Grade</td></tr>";
+	echo "</tr>";
 	
 	$sql2="Select Registers.idNumber From Registers Where Registers.classID =".$_GET['classID']."";
 	//-run  the query against the mysql query function
@@ -83,13 +83,12 @@ $mydb=mysql_select_db("cs476");
 		{
 			//Print the students information
 			$idNumber=$row['idNumber'];
-			$result3 = mysql_query("select Users.idNumber, Users.firstName, Users.lastName, Registers.finalGrade from Users, Registers where Users.idNumber=".$idNumber."
+			$result3 = mysql_query("select Users.idNumber, Users.firstName, Users.lastName from Users, Registers where Users.idNumber=".$idNumber."
 									and Registers.idNumber=Users.idNumber and Registers.classID=".$_GET['classID']."");
 			$row3=mysql_fetch_assoc($result3);
 			$idNumber = $row3['idNumber'];
 			$firstName = $row3['firstName'];
 			$lastName = $row3['lastName'];
-			$finalGrade = $row3['finalGrade'];
 			echo "<tr><td>".$idNumber."</td><td>".$firstName."</td><td>".$lastName."</td>";
 			
 			//Print their grades for each assignment
@@ -104,7 +103,6 @@ $mydb=mysql_select_db("cs476");
 					echo"<td>".$row4['grade']."</td>";
 					}
 				}
-				echo "<td>".$finalGrade."</td>";
 				echo "</tr>";
 		}
 	}
